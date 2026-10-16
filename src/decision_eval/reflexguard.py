@@ -33,6 +33,9 @@ MODEL_IDS = {
     "gliner": "nishparadox/gliner2.5-decide-onnx@bbbcdb0 (fp32; noul averaged over 3 label orders)",
 }
 
+# Jev's cache entries carry no date; both sets were run on the day of reflex-guard commit 4ac8c81.
+RUN_DATES = {"jev": "2026-10-16"}
+
 # What each hosted model's eval run cost, per set, from reflex-guard's run logs (requests include one warm-up per
 # mode pass). Jev: OpenRouter's billed usage.cost. GPT-6 Luna: OpenAI's native API reports no cost, so it is input
 # tokens x USD 0.10 / 1M (output is not billed); its totals include re-running the 37 (core) / 359 (OOD) requests
@@ -124,8 +127,13 @@ def import_all(repo, out_root, model_ids):
         ood = _scores(repo, SETS["guard-ood"], rg_model, ood_rows, ood_cats)
         for suite, rows, cats, per in (("guard-core", test, core_cats, core), ("guard-ood", ood_rows, ood_cats, ood)):
             df = _frame(rows, cats, per, thresholds, model_ids.get(key) or MODEL_IDS.get(key) or rg_model)
-            if df.served.notna().any():  # hosted models: the served snapshot is the exact version
-                df["model"] = df.served.dropna().iloc[0] + (" (created 2026-09-14)" if key == "gpt-6-luna" else "")
+            if df.served.notna().any():  # hosted models: the served snapshot is the exact version, plus run date
+                from .backends import dated
+
+                run_date = df.date.dropna().iloc[0] if df.date.notna().any() else RUN_DATES.get(key)
+                served = df.served.dropna().iloc[0]
+                df["model"] = (f"{served} (created 2026-09-14, run {run_date})" if key == "gpt-6-luna"
+                               else dated(served, run_date))
             d = Path(out_root) / suite
             d.mkdir(parents=True, exist_ok=True)
             df.to_csv(d / f"results_{key}.csv", index=False)

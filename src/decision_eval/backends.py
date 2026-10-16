@@ -35,6 +35,15 @@ MODELS = {
 # List price for gpt-6-luna as of 2026-10-16: https://developers.openai.com/api/docs/guides/decisions
 OPENAI_DECISIONS_USD_PER_INPUT_TOKEN = {"gpt-6-luna": 0.10 / 1e6}
 
+def dated(model_id, run_date=None):
+    """`typesafe/jev-1.14-20261014` -> `typesafe/jev-1.14-20261014 (snapshot 2026-10-14, run 2026-10-16)`."""
+    import re
+
+    run_date = run_date or datetime.date.today().isoformat()
+    m = re.search(r"-(\d{4})(\d{2})(\d{2})$", model_id)
+    return f"{model_id} (snapshot {m[1]}-{m[2]}-{m[3]}, run {run_date})" if m else f"{model_id} (run {run_date})"
+
+
 NO_USAGE = {"input_tokens": None, "output_tokens": None, "cost_usd": 0.0, "request_id": None}
 
 
@@ -120,7 +129,7 @@ def jev_backend(model="typesafe/jev-1.14"):
         res, _ = _post("https://openrouter.ai/api/alpha/decisions", key,
                        {"model": model, "state": state, "questions": questions})
         u = res.get("usage", {})
-        return res["answers"], res["model"], {"input_tokens": u.get("input_tokens"),
+        return res["answers"], dated(res["model"]), {"input_tokens": u.get("input_tokens"),
                                               "output_tokens": u.get("output_tokens"),
                                               "cost_usd": u.get("cost", 0.0), "request_id": res.get("id")}
 
@@ -165,7 +174,7 @@ def openai_backend(model="gpt-6-luna"):
             else:  # score: probabilities keyed by level index, as the other backends return them
                 answers[a["name"]] = {"probabilities": {str(p["value"]): p["probability"] for p in a["probabilities"]}}
         u = res.get("usage", {})
-        return answers, f"{res['model']} (created {created})", {
+        return answers, f"{res['model']} (created {created}, run {datetime.date.today().isoformat()})", {
             "input_tokens": u.get("input_tokens"), "output_tokens": u.get("output_tokens"),
             "cost_usd": (u.get("input_tokens") or 0) * price, "request_id": headers.get("x-request-id")}
 
