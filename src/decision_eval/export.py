@@ -78,7 +78,42 @@ def embed(post_path, payload):
     data = json.loads(m.group(2)) if m.group(2).strip() else {"suites": []}
     data["suites"] = [s for s in data["suites"] if s["id"] != payload["id"]] + [payload]
     blob = json.dumps(data, ensure_ascii=False, separators=(",", ":"), default=float)
-    if "</" in blob or "{%" in blob or "{{" in blob:
-        raise SystemExit("the data contains a sequence that would break the page (</, {% or {{)")
+    # Prompts (e.g. injection attacks) can contain "</" (would end the <script>) or "{{" / "{%" (Liquid). These
+    # sequences only occur inside JSON strings, where escaping one character keeps the parsed text identical.
+    blob = blob.replace("</", "<\\/").replace("{{", "{\\u007b").replace("{%", "{\\u0025")
+    assert json.loads(blob) == json.loads(json.dumps(data, default=float)), "escaping changed the data"
     post_path.write_text(text[:m.start(2)] + blob + text[m.end(2):])
     return data, len(blob)
+
+
+def flag_payload(suite, items, dfs, costs=None, categories=None):
+    """Payload for a flag suite (guardrails). preds per item:
+    [P(flag) noul, choice, score, latency ms noul, choice, score, top category index noul, choice, score, refused]."""
+    from .metrics import FLAG_RATES, flag_summary
+
+    costs = costs or {}
+    cats = list(categories or suite.CATEGORIES)
+    for k, d in dfs.items():
+        assert d.prompt.tolist() == [it["prompt"] for it in items], f"{k}: results do not match the items"
+    models = []
+    for k, d in dfs.items():
+        summary = {}
+        for m in suite.MODES:
+            s = flag_summary(d, m)
+            summary[m] = {kk: (list(s[kk + "_ci"]) and [s[kk], *s[kk + "_ci"]]) if kk in FLAG_RATES else s[kk]
+                          for kk in ("threshold", *FLAG_RATES, "benign_fp", "hard_fp", "auc", "latency_ms")}
+        refused = sum(any(isinstance(r.get(f"refused_{m}"), str) and r.get(f"refused_{m}") for m in suite.MODES)
+                      for r in d.to_dict("records"))
+        summary.update(refused_items=int(refused), **(costs.get(k) or {}))
+        preds = [[_num(r[f"p_{m}"]) for m in suite.MODES] + [round(r[f"latency_ms_{m}"]) for m in suite.MODES]
+                 + [cats.index(r[f"top_{m}"]) for m in suite.MODES]
+                 + [int(any(isinstance(r.get(f"refused_{m}"), str) and r.get(f"refused_{m}") for m in suite.MODES))]
+                 for r in d.to_dict("records")]
+        models.append({"key": k, **MODELS[k], "model_id": str(d.model.iloc[0]), "summary": summary, "preds": preds})
+    kinds = {kd: sum(it["kind"] == kd for it in items) for kd in suite.KINDS}
+    meta = {"suite": suite.ID, "title": suite.TITLE, "n": len(items), "modes": suite.MODES, "task": "flag",
+            "categories": cats, "kinds": kinds, "prevalence": kinds["harmful"] / len(items),
+            "generated": date.today().isoformat()}
+    return {"id": suite.ID, "title": suite.TITLE, "blurb": suite.BLURB, "meta": meta,
+            "items": [[it["kind"], it["prompt"], it["labels"], it["domain"], it["source"]] for it in items],
+            "models": models}

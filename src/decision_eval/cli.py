@@ -4,6 +4,7 @@
     decision-eval run --suite stem-synth --backend jev           # ask every item; writes results/<suite>/
     decision-eval figures --suite stem-synth                     # paper figures + LaTeX table from all results
     decision-eval export --suite stem-synth --post <post.md>     # embed results in the results page
+    decision-eval import-reflexguard --repo <reflex-guard>       # guardrail suites from reflex-guard's eval
 
 Results live in results/<suite>/: items.json (the items as generated) and results_<backend>.csv.
 """
@@ -43,6 +44,8 @@ def cmd_run(args):
     import pandas as pd
 
     suite, out = suites.get(args.suite), _results_dir(args)
+    if getattr(suite, "IMPORTED", False):
+        raise SystemExit(f"{suite.ID} is imported, not run here: decision-eval import-reflexguard --repo <path>")
     out.mkdir(parents=True, exist_ok=True)
     items = suite.build(args.n or suite.DEFAULT_N, args.seed if args.seed is not None else suite.DEFAULT_SEED)
     items_path = out / "items.json"
@@ -62,6 +65,8 @@ def cmd_figures(args):
     from .figures import make_figures
 
     suite, items, dfs = _load(args)
+    if getattr(suite, "TASK", "answer") == "flag":
+        raise SystemExit("paper figures for flag suites come from the results page's Paper view (SVG / PNG per figure)")
     make_figures({backends.MODELS[k]["name"]: d for k, d in dfs.items()}, suite, items, _results_dir(args) / "figures")
 
 
@@ -69,9 +74,24 @@ def cmd_export(args):
     from .export import embed, suite_payload
 
     suite, items, dfs = _load(args)
-    data, size = embed(Path(args.post).expanduser(), suite_payload(suite, items, dfs))
+    if getattr(suite, "TASK", "answer") == "flag":
+        from .export import flag_payload
+        from .reflexguard import COSTS
+        cats = json.loads((_results_dir(args) / "categories.json").read_text())
+        payload = flag_payload(suite, items, dfs, {k: v for (s, k), v in COSTS.items() if s == suite.ID}, list(cats))
+    else:
+        payload = suite_payload(suite, items, dfs)
+    data, size = embed(Path(args.post).expanduser(), payload)
     print(f"embedded {suite.ID} ({len(items)} items × {len(dfs)} models); page now carries "
           f"{[s['id'] for s in data['suites']]}, {size / 1024:.0f} KB of data")
+
+
+def cmd_import_reflexguard(args):
+    from .reflexguard import import_all
+
+    commit, written = import_all(args.repo, args.results, {})
+    for suite, keys in written.items():
+        print(f"{suite}: {', '.join(keys)}  (reflex-guard @ {commit})")
 
 
 def main(argv=None):
@@ -94,6 +114,9 @@ def main(argv=None):
     e.add_argument("--suite", required=True)
     e.add_argument("--post", required=True, help="path to the decision-eval Jekyll post")
     e.set_defaults(fn=cmd_export)
+    i = sub.add_parser("import-reflexguard", help="import the guardrail suites from a reflex-guard checkout")
+    i.add_argument("--repo", required=True, help="path to the reflex-guard repository")
+    i.set_defaults(fn=cmd_import_reflexguard)
     args = p.parse_args(argv)
     args.fn(args)
 

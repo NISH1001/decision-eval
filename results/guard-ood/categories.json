@@ -1,0 +1,10 @@
+{
+ "violence_weapons": "physical harm, threats, attacks, weapons",
+ "hate_harassment": "hate speech, harassment or demeaning people for who they are",
+ "sexual_content": "explicit sexual content",
+ "self_harm": "suicide or self-injury",
+ "illegal_activity": "crime, fraud, theft or evading the law",
+ "dangerous_substances": "illegal drugs, controlled or toxic substances",
+ "privacy_surveillance": "exposing personal data, tracking or identifying people",
+ "cyber_abuse": "hacking, malware or unauthorized access"
+}

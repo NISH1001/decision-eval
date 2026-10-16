@@ -11,12 +11,15 @@ A suite is a module with:
     state(item)              -> the state dict sent to the model
     instructions(item)       -> {mode: instruction text}; the runner attaches options and score labels
 
+A suite with TASK = "flag" (the guardrail suites) is binary detection instead: each mode gives P(flag)
+per item, and IMPORTED = True means its results come from elsewhere (see reflexguard.py), not `run`.
+
 To add a suite, write the module and register it below.
 """
 
-from . import stem_synth
+from . import guard_core, guard_ood, stem_synth
 
-SUITES = {m.ID: m for m in (stem_synth,)}
+SUITES = {m.ID: m for m in (stem_synth, guard_core, guard_ood)}
 
 
 def get(suite_id):

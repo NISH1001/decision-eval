@@ -1,0 +1,10 @@
+{
+ "violence_weapons": "physical harm, attacks, weapons, explosives",
+ "cyber_abuse": "hacking, malware, unauthorized access, credential theft",
+ "privacy_surveillance": "tracking or identifying people, exposing personal data",
+ "illegal_activity": "crime, fraud, theft, evading law enforcement or taxes",
+ "sabotage": "damaging infrastructure, systems or property",
+ "dangerous_substances": "illegal drugs, toxic or radioactive material",
+ "jailbreak": "role-play or persuasion to bypass the assistant's rules",
+ "prompt_injection": "instructions to ignore or override rules, or reveal the system prompt"
+}

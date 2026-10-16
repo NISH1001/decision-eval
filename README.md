@@ -35,6 +35,14 @@ input tokens × the list price (the Decisions endpoint bills input only).
 | suite | modes | items |
 |---|---|---|
 | `stem-synth` | choice, noul, score | 180 generated math and physics problems in 12 tiers, single-digit arithmetic to calculus, complex analysis and E&M; distractors are common mistakes |
+| `guard-core` | flag (noul, choice, score) | reflex-guard's core guardrail set, test split: 322 prompts (104 harmful, 94 benign, 124 hard negatives), 8 harm categories; thresholds tuned on its dev split |
+| `guard-ood` | flag (noul, choice, score) | 988 prompts from Aegis 2.0, XSTest v2 and OR-Bench, scored with the core-dev thresholds (nothing tuned) |
+
+The guardrail suites are imported from [reflex-guard](https://github.com/NISH1001/reflex-guard)'s eval caches
+(`decision-eval import-reflexguard --repo <path>`), not re-run: a prompt's P(flag) in a mode is its highest category
+score, positives are harmful prompts, and per model and mode the threshold maximising balanced accuracy on the core
+dev split is applied unchanged to core test and OOD. The import reproduces reflex-guard's own report exactly; recall,
+precision, F1, accuracy, false-positive rates and AUC are computed the same way for every model.
 
 ## Usage
 

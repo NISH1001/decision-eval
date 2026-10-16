@@ -1,0 +1,12 @@
+{
+ "source": "github.com/NISH1001/reflex-guard",
+ "commit": "999d51d",
+ "set": "data/eval",
+ "models": {
+  "laya": "laya",
+  "gliner": "gliner:fp32:orders=3",
+  "jev": "jev",
+  "gpt-6-luna": "openai"
+ },
+ "thresholds": "per model and mode: best balanced accuracy on the core dev split"
+}
