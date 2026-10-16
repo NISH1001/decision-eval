@@ -250,7 +250,7 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "huggingface-hub", marker = "extra == 'gliner'", specifier = ">=0.25" },
-    { name = "laya", marker = "extra == 'laya'", specifier = ">=0.3.10" },
+    { name = "laya", marker = "extra == 'laya'", specifier = "==0.3.10" },
     { name = "matplotlib", marker = "extra == 'figures'", specifier = ">=3.9" },
     { name = "numpy", specifier = ">=2.0" },
     { name = "onnxruntime", marker = "extra == 'gliner'", specifier = ">=1.20" },
@@ -592,7 +592,7 @@ wheels = [
 
 [[package]]
 name = "laya"
-version = "0.4.8"
+version = "0.3.10"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "huggingface-hub" },
@@ -601,9 +601,9 @@ dependencies = [
     { name = "torch" },
     { name = "transformers" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/4e/2d/a0d23f625a04f8962aa44dfb0a6748243233504510b87f84796cb9b8c7e2/laya-0.4.8.tar.gz", hash = "sha256:979d240d4681a1bf06dda347b55fdb2875bfd2f733779305feb425130ddcac84", size = 1213210, upload-time = "2026-10-15T10:52:26.897Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/85/b3/9f738042617d3cdeb13aef8ebad00e04a716c8c9a3f2d6c60408dafd3890/laya-0.3.10.tar.gz", hash = "sha256:2ff59a5bc8c2ca94cc47cafc81ac896e9d234411919db9a930d04606dab76997", size = 200663, upload-time = "2026-09-23T16:15:48.342Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/b8/cc/6f7d1ec516a450c42b2ad4c164e9cdbacac509bc808a187ec62e99be81ca/laya-0.4.8-py3-none-any.whl", hash = "sha256:05064d8b949803af8cb173561ed0b24d6be5b62cb86d8d319321577c630d0288", size = 405303, upload-time = "2026-10-15T10:52:24.584Z" },
+    { url = "https://files.pythonhosted.org/packages/09/60/0d335a6acee46f5ac9bfb87ab9e5313d7561f84fa3f5482efb0e53543624/laya-0.3.10-py3-none-any.whl", hash = "sha256:1b507dc119c48d3ba0950c13a6303035324c88bf47a73ac3b9c0b60a683596df", size = 93026, upload-time = "2026-09-23T16:15:46.56Z" },
 ]
 
 [[package]]

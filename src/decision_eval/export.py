@@ -46,8 +46,8 @@ def suite_payload(suite, items, dfs):
         if "score" in modes:
             summary["mae"] = s["Score-level MAE"]
         summary.update(latency_ms=s["Median latency (ms)"], cost_usd=float(d.cost_usd.sum()))
-        for col in ("input_tokens", "output_tokens"):  # hosted backends only; local models have none
-            if col in d and d[col].notna().any():
+        if "input_tokens" in d and d.input_tokens.notna().any():  # hosted backends only; local models have none
+            for col in ("input_tokens", "output_tokens"):
                 summary[col] = int(d[col].sum())
                 summary[col + "_median"] = float(d[col].median())
         preds = []

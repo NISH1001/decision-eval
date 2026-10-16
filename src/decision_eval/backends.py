@@ -87,15 +87,26 @@ def _post(url, key, payload, attempts=4):
         time.sleep(2 ** attempt)
 
 
+def _hf_revision(repo):
+    """The commit of the cached Hugging Face snapshot a local model loads from (refs/main), or "unknown"."""
+    from huggingface_hub import constants
+
+    ref = Path(constants.HF_HUB_CACHE) / f"models--{repo.replace('/', '--')}" / "refs" / "main"
+    return ref.read_text().strip()[:7] if ref.exists() else "unknown"
+
+
 def laya_backend(checkpoint="english"):
+    from importlib.metadata import version
+
     from laya import Router
 
     router = Router()
     router.preload([checkpoint])
+    model_id = f"convaiinnovations/laya@{_hf_revision('convaiinnovations/laya')} ({checkpoint}), laya {version('laya')}"
 
     def predict(state, questions):
         res = router.predict(state, questions, model=checkpoint)
-        return res["answers"], res["routing"]["model"], NO_USAGE
+        return res["answers"], model_id, NO_USAGE
 
     return predict
 
@@ -168,6 +179,7 @@ def gliner_backend(repo="nishparadox/gliner2.5-decide-onnx", onnx_file="model.on
     from huggingface_hub import snapshot_download
 
     path = Path(snapshot_download(repo, allow_patterns=[onnx_file, "tokenizer.json", "gliner_onnx.py"]))
+    model_id = f"{repo}@{path.name[:7]}/{onnx_file}"  # snapshot dir name is the commit hash
     spec = importlib.util.spec_from_file_location("gliner_onnx", path / "gliner_onnx.py")
     mod = importlib.util.module_from_spec(spec)
     sys.modules["gliner_onnx"] = mod  # its dataclasses look the module up here
@@ -198,6 +210,6 @@ def gliner_backend(repo="nishparadox/gliner2.5-decide-onnx", onnx_file="model.on
                 continue
             pr = {back[qid][lab]: p for lab, p in probs[qid].items()}
             answers[qid] = {"choice": max(pr, key=pr.get), "probabilities": pr}
-        return answers, f"{repo}/{onnx_file}", NO_USAGE
+        return answers, model_id, NO_USAGE
 
     return predict
