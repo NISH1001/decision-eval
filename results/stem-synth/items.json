@@ -1,0 +1,2882 @@
+[
+ {
+  "id": 0,
+  "category": "1 single-digit",
+  "prompt": "What is 6 - 3?",
+  "answer": "3",
+  "options": [
+   "1",
+   "0",
+   "3",
+   "2"
+  ],
+  "shown_answer": "3",
+  "shown_is_correct": true,
+  "magnitude": 3,
+  "score_level": 0
+ },
+ {
+  "id": 1,
+  "category": "2 multi-digit +/-",
+  "prompt": "What is 9364 + 2128?",
+  "answer": "11492",
+  "options": [
+   "11418",
+   "11492",
+   "11486",
+   "11499"
+  ],
+  "shown_answer": "11492",
+  "shown_is_correct": true,
+  "magnitude": 11492,
+  "score_level": 4
+ },
+ {
+  "id": 2,
+  "category": "3 multiply/divide",
+  "prompt": "What is 85 × 43?",
+  "answer": "3655",
+  "options": [
+   "3655",
+   "3582",
+   "3584",
+   "3575"
+  ],
+  "shown_answer": "3655",
+  "shown_is_correct": true,
+  "magnitude": 3655,
+  "score_level": 3
+ },
+ {
+  "id": 3,
+  "category": "4 fractions/%",
+  "prompt": "What is 1 + 5/4?",
+  "answer": "9/4",
+  "options": [
+   "9/4",
+   "6/5",
+   "5/2",
+   "9/2"
+  ],
+  "shown_answer": "9/4",
+  "shown_is_correct": true,
+  "magnitude": 2.25,
+  "score_level": 0
+ },
+ {
+  "id": 4,
+  "category": "5 powers/roots/order",
+  "prompt": "What is 3^4?",
+  "answer": "81",
+  "options": [
+   "27",
+   "12",
+   "81",
+   "84"
+  ],
+  "shown_answer": "81",
+  "shown_is_correct": true,
+  "magnitude": 81,
+  "score_level": 1
+ },
+ {
+  "id": 5,
+  "category": "6 algebra",
+  "prompt": "Solve for x: 3x + 15 = -9",
+  "answer": "x = -8",
+  "options": [
+   "x = -8",
+   "x = -4",
+   "x = -5",
+   "x = -7"
+  ],
+  "shown_answer": "x = -4",
+  "shown_is_correct": false,
+  "magnitude": 8,
+  "score_level": 0
+ },
+ {
+  "id": 6,
+  "category": "7 complex numbers",
+  "prompt": "What is (1 - i) + (-4 + 3i)?",
+  "answer": "-3 + 2i",
+  "options": [
+   "-3 + 3i",
+   "5 - 4i",
+   "-3 - 2i",
+   "-3 + 2i"
+  ],
+  "shown_answer": "-3 + 2i",
+  "shown_is_correct": true,
+  "magnitude": 3.605551275463989,
+  "score_level": 0
+ },
+ {
+  "id": 7,
+  "category": "8 complex analysis",
+  "prompt": "What is the principal argument of -1 + i, in degrees?",
+  "answer": "135°",
+  "options": [
+   "135°",
+   "-45°",
+   "-135°",
+   "225°"
+  ],
+  "shown_answer": "-45°",
+  "shown_is_correct": false,
+  "magnitude": 135,
+  "score_level": 2
+ },
+ {
+  "id": 8,
+  "category": "9 calculus",
+  "prompt": "If f(x) = 2x³ + 1x² + 3x + 8, what is f′(2)?",
+  "answer": "31",
+  "options": [
+   "31",
+   "13",
+   "29",
+   "34"
+  ],
+  "shown_answer": "13",
+  "shown_is_correct": false,
+  "magnitude": 31,
+  "score_level": 1
+ },
+ {
+  "id": 9,
+  "category": "10 linear alg./number th.",
+  "prompt": "What is 5^9 mod 9?",
+  "answer": "8",
+  "options": [
+   "7",
+   "1",
+   "8",
+   "0"
+  ],
+  "shown_answer": "0",
+  "shown_is_correct": false,
+  "magnitude": 8,
+  "score_level": 0
+ },
+ {
+  "id": 10,
+  "category": "11 physics: mechanics",
+  "prompt": "What is the kinetic energy of a 38 kg object moving at 7 m/s?",
+  "answer": "931 J",
+  "options": [
+   "266 J",
+   "931 J",
+   "1862 J",
+   "133 J"
+  ],
+  "shown_answer": "931 J",
+  "shown_is_correct": true,
+  "magnitude": 931.0,
+  "score_level": 2
+ },
+ {
+  "id": 11,
+  "category": "12 physics: E&M/waves",
+  "prompt": "How much energy, in millijoules, is stored in a 100 μF capacitor charged to 50 V?",
+  "answer": "125 mJ",
+  "options": [
+   "250 mJ",
+   "125000 mJ",
+   "125 mJ",
+   "2.5 mJ"
+  ],
+  "shown_answer": "125 mJ",
+  "shown_is_correct": true,
+  "magnitude": 125.0,
+  "score_level": 2
+ },
+ {
+  "id": 12,
+  "category": "1 single-digit",
+  "prompt": "What is 9 - 7?",
+  "answer": "2",
+  "options": [
+   "4",
+   "2",
+   "3",
+   "0"
+  ],
+  "shown_answer": "2",
+  "shown_is_correct": true,
+  "magnitude": 2,
+  "score_level": 0
+ },
+ {
+  "id": 13,
+  "category": "2 multi-digit +/-",
+  "prompt": "What is 9386 + 2578?",
+  "answer": "11964",
+  "options": [
+   "11954",
+   "12043",
+   "11885",
+   "11964"
+  ],
+  "shown_answer": "11954",
+  "shown_is_correct": false,
+  "magnitude": 11964,
+  "score_level": 4
+ },
+ {
+  "id": 14,
+  "category": "3 multiply/divide",
+  "prompt": "What is 73 × 33?",
+  "answer": "2409",
+  "options": [
+   "2395",
+   "2409",
+   "2430",
+   "2443"
+  ],
+  "shown_answer": "2443",
+  "shown_is_correct": false,
+  "magnitude": 2409,
+  "score_level": 3
+ },
+ {
+  "id": 15,
+  "category": "4 fractions/%",
+  "prompt": "What is 3.7 × 1.7?",
+  "answer": "6.29",
+  "options": [
+   "6.29",
+   "62.9",
+   "7.19",
+   "5.19"
+  ],
+  "shown_answer": "62.9",
+  "shown_is_correct": false,
+  "magnitude": 6.29,
+  "score_level": 0
+ },
+ {
+  "id": 16,
+  "category": "5 powers/roots/order",
+  "prompt": "What is 5^3?",
+  "answer": "125",
+  "options": [
+   "25",
+   "130",
+   "125",
+   "15"
+  ],
+  "shown_answer": "125",
+  "shown_is_correct": true,
+  "magnitude": 125,
+  "score_level": 2
+ },
+ {
+  "id": 17,
+  "category": "6 algebra",
+  "prompt": "Solve for x: 6x + 10 = -44",
+  "answer": "x = -9",
+  "options": [
+   "x = -6",
+   "x = -7",
+   "x = -9",
+   "x = -5"
+  ],
+  "shown_answer": "x = -6",
+  "shown_is_correct": false,
+  "magnitude": 9,
+  "score_level": 0
+ },
+ {
+  "id": 18,
+  "category": "7 complex numbers",
+  "prompt": "What is (1 + 4i) + (-1 + 6i)?",
+  "answer": "10i",
+  "options": [
+   "-10i",
+   "2 - 2i",
+   "11i",
+   "10i"
+  ],
+  "shown_answer": "2 - 2i",
+  "shown_is_correct": false,
+  "magnitude": 10.0,
+  "score_level": 1
+ },
+ {
+  "id": 19,
+  "category": "8 complex analysis",
+  "prompt": "Using De Moivre's theorem, what is (1 + i)^10?",
+  "answer": "32i",
+  "options": [
+   "32i",
+   "-32i",
+   "16 + 16i",
+   "1024"
+  ],
+  "shown_answer": "32i",
+  "shown_is_correct": true,
+  "magnitude": 32.0,
+  "score_level": 1
+ },
+ {
+  "id": 20,
+  "category": "9 calculus",
+  "prompt": "What is the limit of sin(9x) / x as x approaches 0?",
+  "answer": "9",
+  "options": [
+   "0",
+   "9",
+   "1",
+   "1/9"
+  ],
+  "shown_answer": "0",
+  "shown_is_correct": false,
+  "magnitude": 9,
+  "score_level": 0
+ },
+ {
+  "id": 21,
+  "category": "10 linear alg./number th.",
+  "prompt": "What is the determinant of the matrix [[-4, -2, 3], [-2, 3, 1], [-2, 4, 4]]?",
+  "answer": "-50",
+  "options": [
+   "-48",
+   "50",
+   "-50",
+   "-26"
+  ],
+  "shown_answer": "-48",
+  "shown_is_correct": false,
+  "magnitude": 50,
+  "score_level": 1
+ },
+ {
+  "id": 22,
+  "category": "11 physics: mechanics",
+  "prompt": "A 2 kg cart moving at 6 m/s hits a 9 kg cart at rest and they stick together. What is their speed after the collision?",
+  "answer": "1.09 m/s",
+  "options": [
+   "1.33 m/s",
+   "6 m/s",
+   "1.09 m/s",
+   "33 m/s"
+  ],
+  "shown_answer": "1.09 m/s",
+  "shown_is_correct": true,
+  "magnitude": 1.0909090909090908,
+  "score_level": 0
+ },
+ {
+  "id": 23,
+  "category": "12 physics: E&M/waves",
+  "prompt": "What power is dissipated by a 10 Ω resistor with 12 V across it?",
+  "answer": "14.4 W",
+  "options": [
+   "14.4 W",
+   "1440 W",
+   "120 W",
+   "1.2 W"
+  ],
+  "shown_answer": "14.4 W",
+  "shown_is_correct": true,
+  "magnitude": 14.4,
+  "score_level": 1
+ },
+ {
+  "id": 24,
+  "category": "1 single-digit",
+  "prompt": "What is 7 + 3?",
+  "answer": "10",
+  "options": [
+   "12",
+   "13",
+   "7",
+   "10"
+  ],
+  "shown_answer": "10",
+  "shown_is_correct": true,
+  "magnitude": 10,
+  "score_level": 1
+ },
+ {
+  "id": 25,
+  "category": "2 multi-digit +/-",
+  "prompt": "What is 2071 + 9217?",
+  "answer": "11288",
+  "options": [
+   "11174",
+   "11376",
+   "11389",
+   "11288"
+  ],
+  "shown_answer": "11376",
+  "shown_is_correct": false,
+  "magnitude": 11288,
+  "score_level": 4
+ },
+ {
+  "id": 26,
+  "category": "3 multiply/divide",
+  "prompt": "What is 1564 ÷ 23?",
+  "answer": "68",
+  "options": [
+   "72",
+   "68",
+   "73",
+   "62"
+  ],
+  "shown_answer": "68",
+  "shown_is_correct": true,
+  "magnitude": 68,
+  "score_level": 1
+ },
+ {
+  "id": 27,
+  "category": "4 fractions/%",
+  "prompt": "What is 5% of 170?",
+  "answer": "8.5",
+  "options": [
+   "17",
+   "4.25",
+   "8.5",
+   "12.75"
+  ],
+  "shown_answer": "17",
+  "shown_is_correct": false,
+  "magnitude": 8.5,
+  "score_level": 0
+ },
+ {
+  "id": 28,
+  "category": "5 powers/roots/order",
+  "prompt": "What is 7^2?",
+  "answer": "49",
+  "options": [
+   "56",
+   "14",
+   "49",
+   "7"
+  ],
+  "shown_answer": "49",
+  "shown_is_correct": true,
+  "magnitude": 49,
+  "score_level": 1
+ },
+ {
+  "id": 29,
+  "category": "6 algebra",
+  "prompt": "Solve for x: x² - 15x + 56 = 0",
+  "answer": "x = 7 or x = 8",
+  "options": [
+   "x = 1 or x = 56",
+   "x = 7 or x = 8",
+   "x = 7 or x = 9",
+   "x = -8 or x = -7"
+  ],
+  "shown_answer": "x = 7 or x = 8",
+  "shown_is_correct": true,
+  "magnitude": 8,
+  "score_level": 0
+ },
+ {
+  "id": 30,
+  "category": "7 complex numbers",
+  "prompt": "What is the modulus |5 + 12i|?",
+  "answer": "13",
+  "options": [
+   "14",
+   "17",
+   "169",
+   "13"
+  ],
+  "shown_answer": "13",
+  "shown_is_correct": true,
+  "magnitude": 13,
+  "score_level": 1
+ },
+ {
+  "id": 31,
+  "category": "8 complex analysis",
+  "prompt": "What is |(8 + 15i) × (7 - 24i)|?",
+  "answer": "425",
+  "options": [
+   "425",
+   "416",
+   "42",
+   "442"
+  ],
+  "shown_answer": "42",
+  "shown_is_correct": false,
+  "magnitude": 425,
+  "score_level": 2
+ },
+ {
+  "id": 32,
+  "category": "9 calculus",
+  "prompt": "If f(x) = 2x³ - 5x² - 7x - 1, what is f′(2)?",
+  "answer": "-3",
+  "options": [
+   "-9",
+   "-19",
+   "7",
+   "-3"
+  ],
+  "shown_answer": "-9",
+  "shown_is_correct": false,
+  "magnitude": 3,
+  "score_level": 0
+ },
+ {
+  "id": 33,
+  "category": "10 linear alg./number th.",
+  "prompt": "What is the greatest common divisor of 42 and 56?",
+  "answer": "14",
+  "options": [
+   "14",
+   "28",
+   "42",
+   "56"
+  ],
+  "shown_answer": "14",
+  "shown_is_correct": true,
+  "magnitude": 14,
+  "score_level": 1
+ },
+ {
+  "id": 34,
+  "category": "11 physics: mechanics",
+  "prompt": "A car moving at 5 m/s accelerates at 4 m/s² for 3 s. What is its final speed?",
+  "answer": "17 m/s",
+  "options": [
+   "60 m/s",
+   "12 m/s",
+   "17 m/s",
+   "41 m/s"
+  ],
+  "shown_answer": "60 m/s",
+  "shown_is_correct": false,
+  "magnitude": 17,
+  "score_level": 1
+ },
+ {
+  "id": 35,
+  "category": "12 physics: E&M/waves",
+  "prompt": "How much energy, in millijoules, is stored in a 47 μF capacitor charged to 5 V?",
+  "answer": "0.588 mJ",
+  "options": [
+   "587.5 mJ",
+   "1.18 mJ",
+   "0.588 mJ",
+   "0.117 mJ"
+  ],
+  "shown_answer": "0.588 mJ",
+  "shown_is_correct": true,
+  "magnitude": 0.5875,
+  "score_level": 0
+ },
+ {
+  "id": 36,
+  "category": "1 single-digit",
+  "prompt": "What is 9 - 7?",
+  "answer": "2",
+  "options": [
+   "2",
+   "0",
+   "5",
+   "1"
+  ],
+  "shown_answer": "1",
+  "shown_is_correct": false,
+  "magnitude": 2,
+  "score_level": 0
+ },
+ {
+  "id": 37,
+  "category": "2 multi-digit +/-",
+  "prompt": "What is 4532 + 5785?",
+  "answer": "10317",
+  "options": [
+   "10317",
+   "10322",
+   "10314",
+   "10251"
+  ],
+  "shown_answer": "10314",
+  "shown_is_correct": false,
+  "magnitude": 10317,
+  "score_level": 4
+ },
+ {
+  "id": 38,
+  "category": "3 multiply/divide",
+  "prompt": "What is 39 × 17?",
+  "answer": "663",
+  "options": [
+   "663",
+   "637",
+   "667",
+   "662"
+  ],
+  "shown_answer": "662",
+  "shown_is_correct": false,
+  "magnitude": 663,
+  "score_level": 2
+ },
+ {
+  "id": 39,
+  "category": "4 fractions/%",
+  "prompt": "What is 5% of 310?",
+  "answer": "15.5",
+  "options": [
+   "7.75",
+   "23.25",
+   "15.5",
+   "31"
+  ],
+  "shown_answer": "15.5",
+  "shown_is_correct": true,
+  "magnitude": 15.5,
+  "score_level": 1
+ },
+ {
+  "id": 40,
+  "category": "5 powers/roots/order",
+  "prompt": "What is the square root of 225?",
+  "answer": "15",
+  "options": [
+   "14",
+   "15",
+   "18",
+   "17"
+  ],
+  "shown_answer": "15",
+  "shown_is_correct": true,
+  "magnitude": 15,
+  "score_level": 1
+ },
+ {
+  "id": 41,
+  "category": "6 algebra",
+  "prompt": "Solve for x: x² - 7x + 10 = 0",
+  "answer": "x = 2 or x = 5",
+  "options": [
+   "x = 2 or x = 6",
+   "x = -5 or x = -2",
+   "x = 1 or x = 10",
+   "x = 2 or x = 5"
+  ],
+  "shown_answer": "x = 2 or x = 6",
+  "shown_is_correct": false,
+  "magnitude": 5,
+  "score_level": 0
+ },
+ {
+  "id": 42,
+  "category": "7 complex numbers",
+  "prompt": "What is (-2 - 2i) + (4 - 3i)?",
+  "answer": "2 - 5i",
+  "options": [
+   "2 + 5i",
+   "-6 + i",
+   "2 - 4i",
+   "2 - 5i"
+  ],
+  "shown_answer": "-6 + i",
+  "shown_is_correct": false,
+  "magnitude": 5.385164807134504,
+  "score_level": 0
+ },
+ {
+  "id": 43,
+  "category": "8 complex analysis",
+  "prompt": "What is |(8 + 15i) × (6 + 8i)|?",
+  "answer": "170",
+  "options": [
+   "168",
+   "170",
+   "187",
+   "27"
+  ],
+  "shown_answer": "170",
+  "shown_is_correct": true,
+  "magnitude": 170,
+  "score_level": 2
+ },
+ {
+  "id": 44,
+  "category": "9 calculus",
+  "prompt": "What is the integral of 8·sin(x) from x = 0 to x = π?",
+  "answer": "16",
+  "options": [
+   "-16",
+   "16",
+   "8",
+   "0"
+  ],
+  "shown_answer": "-16",
+  "shown_is_correct": false,
+  "magnitude": 16,
+  "score_level": 1
+ },
+ {
+  "id": 45,
+  "category": "10 linear alg./number th.",
+  "prompt": "What is the determinant of the matrix [[-3, -4, -4], [-2, 1, -3], [2, 3, 4]]?",
+  "answer": "-15",
+  "options": [
+   "1",
+   "-12",
+   "15",
+   "-15"
+  ],
+  "shown_answer": "-12",
+  "shown_is_correct": false,
+  "magnitude": 15,
+  "score_level": 1
+ },
+ {
+  "id": 46,
+  "category": "11 physics: mechanics",
+  "prompt": "A cart starts at 15 m/s and accelerates at 3 m/s² for 2 s. How far does it travel?",
+  "answer": "36 m",
+  "options": [
+   "42 m",
+   "6 m",
+   "36 m",
+   "30 m"
+  ],
+  "shown_answer": "42 m",
+  "shown_is_correct": false,
+  "magnitude": 36.0,
+  "score_level": 1
+ },
+ {
+  "id": 47,
+  "category": "12 physics: E&M/waves",
+  "prompt": "What is the electric force between charges of 8 μC and 5 μC placed 0.1 m apart? (k = 8.99 × 10⁹ N·m²/C²)",
+  "answer": "35.96 N",
+  "options": [
+   "71.92 N",
+   "40.4 N",
+   "35.96 N",
+   "3.6 N"
+  ],
+  "shown_answer": "35.96 N",
+  "shown_is_correct": true,
+  "magnitude": 35.959999999999994,
+  "score_level": 1
+ },
+ {
+  "id": 48,
+  "category": "1 single-digit",
+  "prompt": "What is 7 - 2?",
+  "answer": "5",
+  "options": [
+   "4",
+   "6",
+   "5",
+   "3"
+  ],
+  "shown_answer": "5",
+  "shown_is_correct": true,
+  "magnitude": 5,
+  "score_level": 0
+ },
+ {
+  "id": 49,
+  "category": "2 multi-digit +/-",
+  "prompt": "What is 1730 - 3666?",
+  "answer": "-1936",
+  "options": [
+   "-1876",
+   "-1845",
+   "-1936",
+   "-2051"
+  ],
+  "shown_answer": "-1936",
+  "shown_is_correct": true,
+  "magnitude": 1936,
+  "score_level": 3
+ },
+ {
+  "id": 50,
+  "category": "3 multiply/divide",
+  "prompt": "What is 2356 ÷ 31?",
+  "answer": "76",
+  "options": [
+   "74",
+   "78",
+   "76",
+   "75"
+  ],
+  "shown_answer": "75",
+  "shown_is_correct": false,
+  "magnitude": 76,
+  "score_level": 1
+ },
+ {
+  "id": 51,
+  "category": "4 fractions/%",
+  "prompt": "What is 5% of 120?",
+  "answer": "6",
+  "options": [
+   "9",
+   "3",
+   "12",
+   "6"
+  ],
+  "shown_answer": "6",
+  "shown_is_correct": true,
+  "magnitude": 6.0,
+  "score_level": 0
+ },
+ {
+  "id": 52,
+  "category": "5 powers/roots/order",
+  "prompt": "What is 4 + 8 × 7?",
+  "answer": "60",
+  "options": [
+   "61",
+   "60",
+   "84",
+   "58"
+  ],
+  "shown_answer": "84",
+  "shown_is_correct": false,
+  "magnitude": 60,
+  "score_level": 1
+ },
+ {
+  "id": 53,
+  "category": "6 algebra",
+  "prompt": "Solve for x: 8x - 13 = -5",
+  "answer": "x = 1",
+  "options": [
+   "x = 4",
+   "x = 2",
+   "x = 0",
+   "x = 1"
+  ],
+  "shown_answer": "x = 1",
+  "shown_is_correct": true,
+  "magnitude": 1,
+  "score_level": 0
+ },
+ {
+  "id": 54,
+  "category": "7 complex numbers",
+  "prompt": "What is i^29?",
+  "answer": "i",
+  "options": [
+   "-i",
+   "1",
+   "i",
+   "-1"
+  ],
+  "shown_answer": "-1",
+  "shown_is_correct": false,
+  "magnitude": 1.0,
+  "score_level": 0
+ },
+ {
+  "id": 55,
+  "category": "8 complex analysis",
+  "prompt": "What is (11 - 3i) ÷ (2 - i)?",
+  "answer": "5 + i",
+  "options": [
+   "25 + 5i",
+   "5 + i",
+   "5 - i",
+   "-5 - i"
+  ],
+  "shown_answer": "25 + 5i",
+  "shown_is_correct": false,
+  "magnitude": 5.0990195135927845,
+  "score_level": 0
+ },
+ {
+  "id": 56,
+  "category": "9 calculus",
+  "prompt": "What is the limit of sin(2x) / x as x approaches 0?",
+  "answer": "2",
+  "options": [
+   "1",
+   "1/2",
+   "2",
+   "0"
+  ],
+  "shown_answer": "2",
+  "shown_is_correct": true,
+  "magnitude": 2,
+  "score_level": 0
+ },
+ {
+  "id": 57,
+  "category": "10 linear alg./number th.",
+  "prompt": "What is the greatest common divisor of 33 and 55?",
+  "answer": "11",
+  "options": [
+   "55",
+   "11",
+   "22",
+   "33"
+  ],
+  "shown_answer": "11",
+  "shown_is_correct": true,
+  "magnitude": 11,
+  "score_level": 1
+ },
+ {
+  "id": 58,
+  "category": "11 physics: mechanics",
+  "prompt": "What is the gravitational potential energy of a 26 kg mass raised 9 m? (g = 9.8 m/s²)",
+  "answer": "2293.2 J",
+  "options": [
+   "254.8 J",
+   "2293.2 J",
+   "1146.6 J",
+   "234 J"
+  ],
+  "shown_answer": "2293.2 J",
+  "shown_is_correct": true,
+  "magnitude": 2293.2000000000003,
+  "score_level": 3
+ },
+ {
+  "id": 59,
+  "category": "12 physics: E&M/waves",
+  "prompt": "How much energy, in millijoules, is stored in a 220 μF capacitor charged to 50 V?",
+  "answer": "275 mJ",
+  "options": [
+   "275 mJ",
+   "5.5 mJ",
+   "275000 mJ",
+   "550 mJ"
+  ],
+  "shown_answer": "5.5 mJ",
+  "shown_is_correct": false,
+  "magnitude": 275.0,
+  "score_level": 2
+ },
+ {
+  "id": 60,
+  "category": "1 single-digit",
+  "prompt": "What is 7 + 3?",
+  "answer": "10",
+  "options": [
+   "10",
+   "8",
+   "9",
+   "13"
+  ],
+  "shown_answer": "9",
+  "shown_is_correct": false,
+  "magnitude": 10,
+  "score_level": 1
+ },
+ {
+  "id": 61,
+  "category": "2 multi-digit +/-",
+  "prompt": "What is 6274 - 4527?",
+  "answer": "1747",
+  "options": [
+   "1747",
+   "1683",
+   "1821",
+   "1764"
+  ],
+  "shown_answer": "1747",
+  "shown_is_correct": true,
+  "magnitude": 1747,
+  "score_level": 3
+ },
+ {
+  "id": 62,
+  "category": "3 multiply/divide",
+  "prompt": "What is 51 × 4?",
+  "answer": "204",
+  "options": [
+   "250",
+   "242",
+   "205",
+   "204"
+  ],
+  "shown_answer": "204",
+  "shown_is_correct": true,
+  "magnitude": 204,
+  "score_level": 2
+ },
+ {
+  "id": 63,
+  "category": "4 fractions/%",
+  "prompt": "What is 1.2 × 8.2?",
+  "answer": "9.84",
+  "options": [
+   "8.74",
+   "10.74",
+   "9.84",
+   "98.4"
+  ],
+  "shown_answer": "9.84",
+  "shown_is_correct": true,
+  "magnitude": 9.84,
+  "score_level": 0
+ },
+ {
+  "id": 64,
+  "category": "5 powers/roots/order",
+  "prompt": "What is 5^4?",
+  "answer": "625",
+  "options": [
+   "630",
+   "20",
+   "125",
+   "625"
+  ],
+  "shown_answer": "630",
+  "shown_is_correct": false,
+  "magnitude": 625,
+  "score_level": 2
+ },
+ {
+  "id": 65,
+  "category": "6 algebra",
+  "prompt": "Solve for x: 8x - 13 = 75",
+  "answer": "x = 11",
+  "options": [
+   "x = 10",
+   "x = 11",
+   "x = 14",
+   "x = 13"
+  ],
+  "shown_answer": "x = 11",
+  "shown_is_correct": true,
+  "magnitude": 11,
+  "score_level": 1
+ },
+ {
+  "id": 66,
+  "category": "7 complex numbers",
+  "prompt": "What is (2 - 3i) × (-6 - i)?",
+  "answer": "-15 + 16i",
+  "options": [
+   "-9 + 16i",
+   "-15 - 16i",
+   "-15 + 16i",
+   "-12 + 3i"
+  ],
+  "shown_answer": "-15 + 16i",
+  "shown_is_correct": true,
+  "magnitude": 21.93171219946131,
+  "score_level": 1
+ },
+ {
+  "id": 67,
+  "category": "8 complex analysis",
+  "prompt": "What is e^(iπ·2/2)?",
+  "answer": "-1",
+  "options": [
+   "-i",
+   "1",
+   "-1",
+   "i"
+  ],
+  "shown_answer": "1",
+  "shown_is_correct": false,
+  "magnitude": 1,
+  "score_level": 0
+ },
+ {
+  "id": 68,
+  "category": "9 calculus",
+  "prompt": "What is the limit of sin(2x) / x as x approaches 0?",
+  "answer": "2",
+  "options": [
+   "2",
+   "0",
+   "1/2",
+   "1"
+  ],
+  "shown_answer": "2",
+  "shown_is_correct": true,
+  "magnitude": 2,
+  "score_level": 0
+ },
+ {
+  "id": 69,
+  "category": "10 linear alg./number th.",
+  "prompt": "What is 5^5 mod 16?",
+  "answer": "5",
+  "options": [
+   "6",
+   "9",
+   "7",
+   "5"
+  ],
+  "shown_answer": "6",
+  "shown_is_correct": false,
+  "magnitude": 5,
+  "score_level": 0
+ },
+ {
+  "id": 70,
+  "category": "11 physics: mechanics",
+  "prompt": "A ball is thrown straight up at 17 m/s. What maximum height does it reach? (g = 9.8 m/s²)",
+  "answer": "14.7 m",
+  "options": [
+   "0.867 m",
+   "14.7 m",
+   "1.73 m",
+   "29.5 m"
+  ],
+  "shown_answer": "14.7 m",
+  "shown_is_correct": true,
+  "magnitude": 14.744897959183673,
+  "score_level": 1
+ },
+ {
+  "id": 71,
+  "category": "12 physics: E&M/waves",
+  "prompt": "What is the equivalent resistance of a 3 Ω and a 15 Ω resistor in parallel?",
+  "answer": "2.5 Ω",
+  "options": [
+   "9 Ω",
+   "45 Ω",
+   "2.5 Ω",
+   "18 Ω"
+  ],
+  "shown_answer": "2.5 Ω",
+  "shown_is_correct": true,
+  "magnitude": 2.5,
+  "score_level": 0
+ },
+ {
+  "id": 72,
+  "category": "1 single-digit",
+  "prompt": "What is 1 - 3?",
+  "answer": "-2",
+  "options": [
+   "-3",
+   "-2",
+   "-4",
+   "-5"
+  ],
+  "shown_answer": "-3",
+  "shown_is_correct": false,
+  "magnitude": 2,
+  "score_level": 0
+ },
+ {
+  "id": 73,
+  "category": "2 multi-digit +/-",
+  "prompt": "What is 5494 + 3224?",
+  "answer": "8718",
+  "options": [
+   "8804",
+   "8826",
+   "8723",
+   "8718"
+  ],
+  "shown_answer": "8718",
+  "shown_is_correct": true,
+  "magnitude": 8718,
+  "score_level": 3
+ },
+ {
+  "id": 74,
+  "category": "3 multiply/divide",
+  "prompt": "What is 1026 ÷ 38?",
+  "answer": "27",
+  "options": [
+   "30",
+   "23",
+   "27",
+   "28"
+  ],
+  "shown_answer": "27",
+  "shown_is_correct": true,
+  "magnitude": 27,
+  "score_level": 1
+ },
+ {
+  "id": 75,
+  "category": "4 fractions/%",
+  "prompt": "What is 5% of 280?",
+  "answer": "14",
+  "options": [
+   "14",
+   "21",
+   "7",
+   "28"
+  ],
+  "shown_answer": "14",
+  "shown_is_correct": true,
+  "magnitude": 14.0,
+  "score_level": 1
+ },
+ {
+  "id": 76,
+  "category": "5 powers/roots/order",
+  "prompt": "What is 9^2?",
+  "answer": "81",
+  "options": [
+   "9",
+   "90",
+   "18",
+   "81"
+  ],
+  "shown_answer": "90",
+  "shown_is_correct": false,
+  "magnitude": 81,
+  "score_level": 1
+ },
+ {
+  "id": 77,
+  "category": "6 algebra",
+  "prompt": "Solve for x: 7x + 19 = 12",
+  "answer": "x = -1",
+  "options": [
+   "x = -1",
+   "x = 2",
+   "x = -4",
+   "x = 0"
+  ],
+  "shown_answer": "x = -4",
+  "shown_is_correct": false,
+  "magnitude": 1,
+  "score_level": 0
+ },
+ {
+  "id": 78,
+  "category": "7 complex numbers",
+  "prompt": "What is the modulus |-6 - 8i|?",
+  "answer": "10",
+  "options": [
+   "10",
+   "11",
+   "14",
+   "100"
+  ],
+  "shown_answer": "10",
+  "shown_is_correct": true,
+  "magnitude": 10,
+  "score_level": 1
+ },
+ {
+  "id": 79,
+  "category": "8 complex analysis",
+  "prompt": "What is |(3 + 4i) × (5 + 12i)|?",
+  "answer": "65",
+  "options": [
+   "63",
+   "70",
+   "65",
+   "18"
+  ],
+  "shown_answer": "65",
+  "shown_is_correct": true,
+  "magnitude": 65,
+  "score_level": 1
+ },
+ {
+  "id": 80,
+  "category": "9 calculus",
+  "prompt": "If f(x) = 4x³ + 2x² + 8x + 1, what is f′(-2)?",
+  "answer": "48",
+  "options": [
+   "-39",
+   "20",
+   "48",
+   "52"
+  ],
+  "shown_answer": "48",
+  "shown_is_correct": true,
+  "magnitude": 48,
+  "score_level": 1
+ },
+ {
+  "id": 81,
+  "category": "10 linear alg./number th.",
+  "prompt": "What is the determinant of the matrix [[-3, -6], [4, 6]]?",
+  "answer": "6",
+  "options": [
+   "-42",
+   "-6",
+   "6",
+   "3"
+  ],
+  "shown_answer": "6",
+  "shown_is_correct": true,
+  "magnitude": 6,
+  "score_level": 0
+ },
+ {
+  "id": 82,
+  "category": "11 physics: mechanics",
+  "prompt": "What is the kinetic energy of a 40 kg object moving at 30 m/s?",
+  "answer": "18000 J",
+  "options": [
+   "1200 J",
+   "18000 J",
+   "600 J",
+   "36000 J"
+  ],
+  "shown_answer": "600 J",
+  "shown_is_correct": false,
+  "magnitude": 18000.0,
+  "score_level": 4
+ },
+ {
+  "id": 83,
+  "category": "12 physics: E&M/waves",
+  "prompt": "What is the equivalent resistance of a 8 Ω and a 30 Ω resistor in parallel?",
+  "answer": "6.32 Ω",
+  "options": [
+   "6.32 Ω",
+   "240 Ω",
+   "38 Ω",
+   "19 Ω"
+  ],
+  "shown_answer": "6.32 Ω",
+  "shown_is_correct": true,
+  "magnitude": 6.315789473684211,
+  "score_level": 0
+ },
+ {
+  "id": 84,
+  "category": "1 single-digit",
+  "prompt": "What is 4 + 3?",
+  "answer": "7",
+  "options": [
+   "5",
+   "6",
+   "10",
+   "7"
+  ],
+  "shown_answer": "6",
+  "shown_is_correct": false,
+  "magnitude": 7,
+  "score_level": 0
+ },
+ {
+  "id": 85,
+  "category": "2 multi-digit +/-",
+  "prompt": "What is 173 + 7878?",
+  "answer": "8051",
+  "options": [
+   "8057",
+   "8081",
+   "8169",
+   "8051"
+  ],
+  "shown_answer": "8051",
+  "shown_is_correct": true,
+  "magnitude": 8051,
+  "score_level": 3
+ },
+ {
+  "id": 86,
+  "category": "3 multiply/divide",
+  "prompt": "What is 2025 ÷ 45?",
+  "answer": "45",
+  "options": [
+   "47",
+   "42",
+   "45",
+   "39"
+  ],
+  "shown_answer": "45",
+  "shown_is_correct": true,
+  "magnitude": 45,
+  "score_level": 1
+ },
+ {
+  "id": 87,
+  "category": "4 fractions/%",
+  "prompt": "What is 10% of 210?",
+  "answer": "21",
+  "options": [
+   "42",
+   "10.5",
+   "31.5",
+   "21"
+  ],
+  "shown_answer": "31.5",
+  "shown_is_correct": false,
+  "magnitude": 21.0,
+  "score_level": 1
+ },
+ {
+  "id": 88,
+  "category": "5 powers/roots/order",
+  "prompt": "What is the square root of 36?",
+  "answer": "6",
+  "options": [
+   "4",
+   "8",
+   "7",
+   "6"
+  ],
+  "shown_answer": "6",
+  "shown_is_correct": true,
+  "magnitude": 6,
+  "score_level": 0
+ },
+ {
+  "id": 89,
+  "category": "6 algebra",
+  "prompt": "Solve for x: 5x + 5 = 15",
+  "answer": "x = 2",
+  "options": [
+   "x = 1",
+   "x = -2",
+   "x = 2",
+   "x = 4"
+  ],
+  "shown_answer": "x = 1",
+  "shown_is_correct": false,
+  "magnitude": 2,
+  "score_level": 0
+ },
+ {
+  "id": 90,
+  "category": "7 complex numbers",
+  "prompt": "What is the modulus |-7 - 24i|?",
+  "answer": "25",
+  "options": [
+   "26",
+   "25",
+   "31",
+   "625"
+  ],
+  "shown_answer": "31",
+  "shown_is_correct": false,
+  "magnitude": 25,
+  "score_level": 1
+ },
+ {
+  "id": 91,
+  "category": "8 complex analysis",
+  "prompt": "What is (-2 + 6i) ÷ (2 + 2i)?",
+  "answer": "1 + 2i",
+  "options": [
+   "-1 - 2i",
+   "8 + 16i",
+   "1 - 2i",
+   "1 + 2i"
+  ],
+  "shown_answer": "1 + 2i",
+  "shown_is_correct": true,
+  "magnitude": 2.23606797749979,
+  "score_level": 0
+ },
+ {
+  "id": 92,
+  "category": "9 calculus",
+  "prompt": "What is the limit of sin(3x) / x as x approaches 0?",
+  "answer": "3",
+  "options": [
+   "1/3",
+   "3",
+   "1",
+   "0"
+  ],
+  "shown_answer": "1/3",
+  "shown_is_correct": false,
+  "magnitude": 3,
+  "score_level": 0
+ },
+ {
+  "id": 93,
+  "category": "10 linear alg./number th.",
+  "prompt": "What is the determinant of the matrix [[3, -2, -1], [-4, 2, 4], [-2, 2, 1]]?",
+  "answer": "-6",
+  "options": [
+   "-22",
+   "6",
+   "0",
+   "-6"
+  ],
+  "shown_answer": "-22",
+  "shown_is_correct": false,
+  "magnitude": 6,
+  "score_level": 0
+ },
+ {
+  "id": 94,
+  "category": "11 physics: mechanics",
+  "prompt": "A car moving at 17 m/s accelerates at 6 m/s² for 2 s. What is its final speed?",
+  "answer": "29 m/s",
+  "options": [
+   "12 m/s",
+   "204 m/s",
+   "29 m/s",
+   "41 m/s"
+  ],
+  "shown_answer": "12 m/s",
+  "shown_is_correct": false,
+  "magnitude": 29,
+  "score_level": 1
+ },
+ {
+  "id": 95,
+  "category": "12 physics: E&M/waves",
+  "prompt": "What is the electric force between charges of 5 μC and 7 μC placed 0.3 m apart? (k = 8.99 × 10⁹ N·m²/C²)",
+  "answer": "3.5 N",
+  "options": [
+   "3.5 N",
+   "6.99 N",
+   "0.35 N",
+   "1.05 N"
+  ],
+  "shown_answer": "6.99 N",
+  "shown_is_correct": false,
+  "magnitude": 3.496111111111111,
+  "score_level": 0
+ },
+ {
+  "id": 96,
+  "category": "1 single-digit",
+  "prompt": "What is 9 + 8?",
+  "answer": "17",
+  "options": [
+   "17",
+   "19",
+   "15",
+   "16"
+  ],
+  "shown_answer": "17",
+  "shown_is_correct": true,
+  "magnitude": 17,
+  "score_level": 1
+ },
+ {
+  "id": 97,
+  "category": "2 multi-digit +/-",
+  "prompt": "What is 7341 + 8363?",
+  "answer": "15704",
+  "options": [
+   "15622",
+   "15804",
+   "15693",
+   "15704"
+  ],
+  "shown_answer": "15704",
+  "shown_is_correct": true,
+  "magnitude": 15704,
+  "score_level": 4
+ },
+ {
+  "id": 98,
+  "category": "3 multiply/divide",
+  "prompt": "What is 1554 ÷ 21?",
+  "answer": "74",
+  "options": [
+   "74",
+   "73",
+   "79",
+   "68"
+  ],
+  "shown_answer": "74",
+  "shown_is_correct": true,
+  "magnitude": 74,
+  "score_level": 1
+ },
+ {
+  "id": 99,
+  "category": "4 fractions/%",
+  "prompt": "What is 25% of 340?",
+  "answer": "85",
+  "options": [
+   "85",
+   "42.5",
+   "127.5",
+   "170"
+  ],
+  "shown_answer": "85",
+  "shown_is_correct": true,
+  "magnitude": 85.0,
+  "score_level": 1
+ },
+ {
+  "id": 100,
+  "category": "5 powers/roots/order",
+  "prompt": "What is 8^2?",
+  "answer": "64",
+  "options": [
+   "64",
+   "16",
+   "72",
+   "8"
+  ],
+  "shown_answer": "16",
+  "shown_is_correct": false,
+  "magnitude": 64,
+  "score_level": 1
+ },
+ {
+  "id": 101,
+  "category": "6 algebra",
+  "prompt": "Solve for x: x² - 7x + 10 = 0",
+  "answer": "x = 2 or x = 5",
+  "options": [
+   "x = 1 or x = 10",
+   "x = -5 or x = -2",
+   "x = 2 or x = 6",
+   "x = 2 or x = 5"
+  ],
+  "shown_answer": "x = 2 or x = 6",
+  "shown_is_correct": false,
+  "magnitude": 5,
+  "score_level": 0
+ },
+ {
+  "id": 102,
+  "category": "7 complex numbers",
+  "prompt": "What is the complex conjugate of 2 + 3i?",
+  "answer": "2 - 3i",
+  "options": [
+   "2 - 3i",
+   "-2 - 3i",
+   "3 + 2i",
+   "-2 + 3i"
+  ],
+  "shown_answer": "-2 + 3i",
+  "shown_is_correct": false,
+  "magnitude": 3.605551275463989,
+  "score_level": 0
+ },
+ {
+  "id": 103,
+  "category": "8 complex analysis",
+  "prompt": "What is the principal argument of √3 + i, in degrees?",
+  "answer": "30°",
+  "options": [
+   "120°",
+   "30°",
+   "-30°",
+   "60°"
+  ],
+  "shown_answer": "30°",
+  "shown_is_correct": true,
+  "magnitude": 30,
+  "score_level": 1
+ },
+ {
+  "id": 104,
+  "category": "9 calculus",
+  "prompt": "If f(x) = 4x³ - 3x² - 4x - 8, what is f′(2)?",
+  "answer": "32",
+  "options": [
+   "32",
+   "38",
+   "4",
+   "6"
+  ],
+  "shown_answer": "38",
+  "shown_is_correct": false,
+  "magnitude": 32,
+  "score_level": 1
+ },
+ {
+  "id": 105,
+  "category": "10 linear alg./number th.",
+  "prompt": "What is the determinant of the matrix [[-2, -5], [0, 4]]?",
+  "answer": "-8",
+  "options": [
+   "-8",
+   "8",
+   "10",
+   "2"
+  ],
+  "shown_answer": "8",
+  "shown_is_correct": false,
+  "magnitude": 8,
+  "score_level": 0
+ },
+ {
+  "id": 106,
+  "category": "11 physics: mechanics",
+  "prompt": "What is the kinetic energy of a 15 kg object moving at 21 m/s?",
+  "answer": "3307.5 J",
+  "options": [
+   "6615 J",
+   "157.5 J",
+   "315 J",
+   "3307.5 J"
+  ],
+  "shown_answer": "3307.5 J",
+  "shown_is_correct": true,
+  "magnitude": 3307.5,
+  "score_level": 3
+ },
+ {
+  "id": 107,
+  "category": "12 physics: E&M/waves",
+  "prompt": "What is the equivalent resistance of a 8 Ω and a 3 Ω resistor in parallel?",
+  "answer": "2.18 Ω",
+  "options": [
+   "11 Ω",
+   "2.18 Ω",
+   "24 Ω",
+   "5.5 Ω"
+  ],
+  "shown_answer": "2.18 Ω",
+  "shown_is_correct": true,
+  "magnitude": 2.1818181818181817,
+  "score_level": 0
+ },
+ {
+  "id": 108,
+  "category": "1 single-digit",
+  "prompt": "What is 5 + 3?",
+  "answer": "8",
+  "options": [
+   "8",
+   "7",
+   "9",
+   "11"
+  ],
+  "shown_answer": "8",
+  "shown_is_correct": true,
+  "magnitude": 8,
+  "score_level": 0
+ },
+ {
+  "id": 109,
+  "category": "2 multi-digit +/-",
+  "prompt": "What is 4429 + 288?",
+  "answer": "4717",
+  "options": [
+   "4795",
+   "4749",
+   "4794",
+   "4717"
+  ],
+  "shown_answer": "4717",
+  "shown_is_correct": true,
+  "magnitude": 4717,
+  "score_level": 3
+ },
+ {
+  "id": 110,
+  "category": "3 multiply/divide",
+  "prompt": "What is 19 × 9?",
+  "answer": "171",
+  "options": [
+   "177",
+   "178",
+   "166",
+   "171"
+  ],
+  "shown_answer": "178",
+  "shown_is_correct": false,
+  "magnitude": 171,
+  "score_level": 2
+ },
+ {
+  "id": 111,
+  "category": "4 fractions/%",
+  "prompt": "What is 4/3 + 1?",
+  "answer": "7/3",
+  "options": [
+   "8/3",
+   "14/3",
+   "7/3",
+   "5/4"
+  ],
+  "shown_answer": "7/3",
+  "shown_is_correct": true,
+  "magnitude": 2.3333333333333335,
+  "score_level": 0
+ },
+ {
+  "id": 112,
+  "category": "5 powers/roots/order",
+  "prompt": "What is 6 + 2 × 6?",
+  "answer": "18",
+  "options": [
+   "18",
+   "48",
+   "19",
+   "16"
+  ],
+  "shown_answer": "18",
+  "shown_is_correct": true,
+  "magnitude": 18,
+  "score_level": 1
+ },
+ {
+  "id": 113,
+  "category": "6 algebra",
+  "prompt": "Solve for x: x² - 6x + 8 = 0",
+  "answer": "x = 2 or x = 4",
+  "options": [
+   "x = 2 or x = 5",
+   "x = -4 or x = -2",
+   "x = 1 or x = 8",
+   "x = 2 or x = 4"
+  ],
+  "shown_answer": "x = 1 or x = 8",
+  "shown_is_correct": false,
+  "magnitude": 4,
+  "score_level": 0
+ },
+ {
+  "id": 114,
+  "category": "7 complex numbers",
+  "prompt": "What is (-4 + 5i) × (-1 - 3i)?",
+  "answer": "19 + 7i",
+  "options": [
+   "4 - 15i",
+   "19 + 7i",
+   "-11 + 7i",
+   "19 - 7i"
+  ],
+  "shown_answer": "19 + 7i",
+  "shown_is_correct": true,
+  "magnitude": 20.248456731316587,
+  "score_level": 1
+ },
+ {
+  "id": 115,
+  "category": "8 complex analysis",
+  "prompt": "What is |(8 + 15i) × (7 - 24i)|?",
+  "answer": "425",
+  "options": [
+   "416",
+   "442",
+   "42",
+   "425"
+  ],
+  "shown_answer": "416",
+  "shown_is_correct": false,
+  "magnitude": 425,
+  "score_level": 2
+ },
+ {
+  "id": 116,
+  "category": "9 calculus",
+  "prompt": "What is the definite integral of 12x² + 10x from x = 0 to x = 5?",
+  "answer": "625",
+  "options": [
+   "1750",
+   "130",
+   "350",
+   "625"
+  ],
+  "shown_answer": "625",
+  "shown_is_correct": true,
+  "magnitude": 625,
+  "score_level": 2
+ },
+ {
+  "id": 117,
+  "category": "10 linear alg./number th.",
+  "prompt": "What is the determinant of the matrix [[-6, -6], [-4, 2]]?",
+  "answer": "-36",
+  "options": [
+   "44",
+   "-36",
+   "36",
+   "12"
+  ],
+  "shown_answer": "-36",
+  "shown_is_correct": true,
+  "magnitude": 36,
+  "score_level": 1
+ },
+ {
+  "id": 118,
+  "category": "11 physics: mechanics",
+  "prompt": "A cart starts at 1 m/s and accelerates at 6 m/s² for 3 s. How far does it travel?",
+  "answer": "30 m",
+  "options": [
+   "27 m",
+   "57 m",
+   "3 m",
+   "30 m"
+  ],
+  "shown_answer": "30 m",
+  "shown_is_correct": true,
+  "magnitude": 30.0,
+  "score_level": 1
+ },
+ {
+  "id": 119,
+  "category": "12 physics: E&M/waves",
+  "prompt": "How much energy, in millijoules, is stored in a 10 μF capacitor charged to 25 V?",
+  "answer": "3.12 mJ",
+  "options": [
+   "6.25 mJ",
+   "0.125 mJ",
+   "3125 mJ",
+   "3.12 mJ"
+  ],
+  "shown_answer": "3.12 mJ",
+  "shown_is_correct": true,
+  "magnitude": 3.125,
+  "score_level": 0
+ },
+ {
+  "id": 120,
+  "category": "1 single-digit",
+  "prompt": "What is 1 + 1?",
+  "answer": "2",
+  "options": [
+   "-1",
+   "1",
+   "4",
+   "2"
+  ],
+  "shown_answer": "4",
+  "shown_is_correct": false,
+  "magnitude": 2,
+  "score_level": 0
+ },
+ {
+  "id": 121,
+  "category": "2 multi-digit +/-",
+  "prompt": "What is 6129 - 5356?",
+  "answer": "773",
+  "options": [
+   "853",
+   "777",
+   "672",
+   "773"
+  ],
+  "shown_answer": "853",
+  "shown_is_correct": false,
+  "magnitude": 773,
+  "score_level": 2
+ },
+ {
+  "id": 122,
+  "category": "3 multiply/divide",
+  "prompt": "What is 85 × 21?",
+  "answer": "1785",
+  "options": [
+   "1785",
+   "1717",
+   "1784",
+   "1748"
+  ],
+  "shown_answer": "1717",
+  "shown_is_correct": false,
+  "magnitude": 1785,
+  "score_level": 3
+ },
+ {
+  "id": 123,
+  "category": "4 fractions/%",
+  "prompt": "What is 75% of 150?",
+  "answer": "112.5",
+  "options": [
+   "56.25",
+   "112.5",
+   "168.75",
+   "225"
+  ],
+  "shown_answer": "112.5",
+  "shown_is_correct": true,
+  "magnitude": 112.5,
+  "score_level": 2
+ },
+ {
+  "id": 124,
+  "category": "5 powers/roots/order",
+  "prompt": "What is 3 + 9 × 3?",
+  "answer": "30",
+  "options": [
+   "28",
+   "30",
+   "36",
+   "31"
+  ],
+  "shown_answer": "30",
+  "shown_is_correct": true,
+  "magnitude": 30,
+  "score_level": 1
+ },
+ {
+  "id": 125,
+  "category": "6 algebra",
+  "prompt": "Solve for x: 8x - 19 = -75",
+  "answer": "x = -7",
+  "options": [
+   "x = -5",
+   "x = -7",
+   "x = -10",
+   "x = -4"
+  ],
+  "shown_answer": "x = -4",
+  "shown_is_correct": false,
+  "magnitude": 7,
+  "score_level": 0
+ },
+ {
+  "id": 126,
+  "category": "7 complex numbers",
+  "prompt": "What is the complex conjugate of 5 - i?",
+  "answer": "5 + i",
+  "options": [
+   "5 + i",
+   "-5 + i",
+   "-5 - i",
+   "-1 + 5i"
+  ],
+  "shown_answer": "-5 + i",
+  "shown_is_correct": false,
+  "magnitude": 5.0990195135927845,
+  "score_level": 0
+ },
+ {
+  "id": 127,
+  "category": "8 complex analysis",
+  "prompt": "What is the principal argument of 1 + √3i, in degrees?",
+  "answer": "60°",
+  "options": [
+   "-60°",
+   "60°",
+   "30°",
+   "150°"
+  ],
+  "shown_answer": "60°",
+  "shown_is_correct": true,
+  "magnitude": 60,
+  "score_level": 1
+ },
+ {
+  "id": 128,
+  "category": "9 calculus",
+  "prompt": "What is the integral of 4·sin(x) from x = 0 to x = π?",
+  "answer": "8",
+  "options": [
+   "4",
+   "-8",
+   "8",
+   "0"
+  ],
+  "shown_answer": "4",
+  "shown_is_correct": false,
+  "magnitude": 8,
+  "score_level": 0
+ },
+ {
+  "id": 129,
+  "category": "10 linear alg./number th.",
+  "prompt": "What is the determinant of the matrix [[-1, 1, -1], [0, -3, -2], [-3, -1, 2]]?",
+  "answer": "23",
+  "options": [
+   "-23",
+   "6",
+   "23",
+   "11"
+  ],
+  "shown_answer": "-23",
+  "shown_is_correct": false,
+  "magnitude": 23,
+  "score_level": 1
+ },
+ {
+  "id": 130,
+  "category": "11 physics: mechanics",
+  "prompt": "An object is dropped from rest from a height of 10 m. How long does it take to hit the ground? (g = 9.8 m/s²)",
+  "answer": "1.43 s",
+  "options": [
+   "1.01 s",
+   "1.02 s",
+   "2.04 s",
+   "1.43 s"
+  ],
+  "shown_answer": "1.43 s",
+  "shown_is_correct": true,
+  "magnitude": 1.4285714285714286,
+  "score_level": 0
+ },
+ {
+  "id": 131,
+  "category": "12 physics: E&M/waves",
+  "prompt": "A wave has frequency 440 Hz and wavelength 0.5 m. What is its speed?",
+  "answer": "220 m/s",
+  "options": [
+   "440.5 m/s",
+   "0.00114 m/s",
+   "880 m/s",
+   "220 m/s"
+  ],
+  "shown_answer": "440.5 m/s",
+  "shown_is_correct": false,
+  "magnitude": 220.0,
+  "score_level": 2
+ },
+ {
+  "id": 132,
+  "category": "1 single-digit",
+  "prompt": "What is 5 + 8?",
+  "answer": "13",
+  "options": [
+   "10",
+   "14",
+   "11",
+   "13"
+  ],
+  "shown_answer": "13",
+  "shown_is_correct": true,
+  "magnitude": 13,
+  "score_level": 1
+ },
+ {
+  "id": 133,
+  "category": "2 multi-digit +/-",
+  "prompt": "What is 1703 + 6974?",
+  "answer": "8677",
+  "options": [
+   "8739",
+   "8769",
+   "8677",
+   "8644"
+  ],
+  "shown_answer": "8769",
+  "shown_is_correct": false,
+  "magnitude": 8677,
+  "score_level": 3
+ },
+ {
+  "id": 134,
+  "category": "3 multiply/divide",
+  "prompt": "What is 304 ÷ 19?",
+  "answer": "16",
+  "options": [
+   "17",
+   "10",
+   "11",
+   "16"
+  ],
+  "shown_answer": "11",
+  "shown_is_correct": false,
+  "magnitude": 16,
+  "score_level": 1
+ },
+ {
+  "id": 135,
+  "category": "4 fractions/%",
+  "prompt": "What is 9.4 × 2.2?",
+  "answer": "20.68",
+  "options": [
+   "21.58",
+   "20.68",
+   "206.8",
+   "19.58"
+  ],
+  "shown_answer": "206.8",
+  "shown_is_correct": false,
+  "magnitude": 20.68,
+  "score_level": 1
+ },
+ {
+  "id": 136,
+  "category": "5 powers/roots/order",
+  "prompt": "What is the square root of 576?",
+  "answer": "24",
+  "options": [
+   "28",
+   "21",
+   "25",
+   "24"
+  ],
+  "shown_answer": "25",
+  "shown_is_correct": false,
+  "magnitude": 24,
+  "score_level": 1
+ },
+ {
+  "id": 137,
+  "category": "6 algebra",
+  "prompt": "Solve for x: x² - 15x + 56 = 0",
+  "answer": "x = 7 or x = 8",
+  "options": [
+   "x = 1 or x = 56",
+   "x = 7 or x = 9",
+   "x = 7 or x = 8",
+   "x = -8 or x = -7"
+  ],
+  "shown_answer": "x = -8 or x = -7",
+  "shown_is_correct": false,
+  "magnitude": 8,
+  "score_level": 0
+ },
+ {
+  "id": 138,
+  "category": "7 complex numbers",
+  "prompt": "What is (1 + 4i) × (2 + 5i)?",
+  "answer": "-18 + 13i",
+  "options": [
+   "2 + 20i",
+   "-18 - 13i",
+   "-18 + 13i",
+   "22 + 13i"
+  ],
+  "shown_answer": "2 + 20i",
+  "shown_is_correct": false,
+  "magnitude": 22.20360331117452,
+  "score_level": 1
+ },
+ {
+  "id": 139,
+  "category": "8 complex analysis",
+  "prompt": "What is e^(iπ·5/2)?",
+  "answer": "i",
+  "options": [
+   "i",
+   "-1",
+   "-i",
+   "1"
+  ],
+  "shown_answer": "1",
+  "shown_is_correct": false,
+  "magnitude": 1.0,
+  "score_level": 0
+ },
+ {
+  "id": 140,
+  "category": "9 calculus",
+  "prompt": "What is the limit of (x² - 64) / (x - 8) as x approaches 8?",
+  "answer": "16",
+  "options": [
+   "64",
+   "16",
+   "0",
+   "8"
+  ],
+  "shown_answer": "16",
+  "shown_is_correct": true,
+  "magnitude": 16,
+  "score_level": 1
+ },
+ {
+  "id": 141,
+  "category": "10 linear alg./number th.",
+  "prompt": "What is the greatest common divisor of 39 and 52?",
+  "answer": "13",
+  "options": [
+   "13",
+   "52",
+   "26",
+   "39"
+  ],
+  "shown_answer": "13",
+  "shown_is_correct": true,
+  "magnitude": 13,
+  "score_level": 1
+ },
+ {
+  "id": 142,
+  "category": "11 physics: mechanics",
+  "prompt": "What is the gravitational potential energy of a 6 kg mass raised 44 m? (g = 9.8 m/s²)",
+  "answer": "2587.2 J",
+  "options": [
+   "58.8 J",
+   "264 J",
+   "2587.2 J",
+   "1293.6 J"
+  ],
+  "shown_answer": "264 J",
+  "shown_is_correct": false,
+  "magnitude": 2587.2000000000003,
+  "score_level": 3
+ },
+ {
+  "id": 143,
+  "category": "12 physics: E&M/waves",
+  "prompt": "A 120 V battery is connected across a 10 Ω resistor. What current flows?",
+  "answer": "12 A",
+  "options": [
+   "12 A",
+   "6 A",
+   "0.0833 A",
+   "1200 A"
+  ],
+  "shown_answer": "1200 A",
+  "shown_is_correct": false,
+  "magnitude": 12.0,
+  "score_level": 1
+ },
+ {
+  "id": 144,
+  "category": "1 single-digit",
+  "prompt": "What is 1 + 4?",
+  "answer": "5",
+  "options": [
+   "4",
+   "5",
+   "2",
+   "7"
+  ],
+  "shown_answer": "4",
+  "shown_is_correct": false,
+  "magnitude": 5,
+  "score_level": 0
+ },
+ {
+  "id": 145,
+  "category": "2 multi-digit +/-",
+  "prompt": "What is 4966 - 3333?",
+  "answer": "1633",
+  "options": [
+   "1633",
+   "1538",
+   "1719",
+   "1565"
+  ],
+  "shown_answer": "1538",
+  "shown_is_correct": false,
+  "magnitude": 1633,
+  "score_level": 3
+ },
+ {
+  "id": 146,
+  "category": "3 multiply/divide",
+  "prompt": "What is 852 ÷ 12?",
+  "answer": "71",
+  "options": [
+   "71",
+   "69",
+   "67",
+   "66"
+  ],
+  "shown_answer": "69",
+  "shown_is_correct": false,
+  "magnitude": 71,
+  "score_level": 1
+ },
+ {
+  "id": 147,
+  "category": "4 fractions/%",
+  "prompt": "What is 2/7 + 3/7?",
+  "answer": "5/7",
+  "options": [
+   "6/7",
+   "5/14",
+   "10/7",
+   "5/7"
+  ],
+  "shown_answer": "5/14",
+  "shown_is_correct": false,
+  "magnitude": 0.7142857142857143,
+  "score_level": 0
+ },
+ {
+  "id": 148,
+  "category": "5 powers/roots/order",
+  "prompt": "What is 9^3?",
+  "answer": "729",
+  "options": [
+   "738",
+   "81",
+   "729",
+   "27"
+  ],
+  "shown_answer": "738",
+  "shown_is_correct": false,
+  "magnitude": 729,
+  "score_level": 2
+ },
+ {
+  "id": 149,
+  "category": "6 algebra",
+  "prompt": "Solve for x: 7x + 1 = -41",
+  "answer": "x = -6",
+  "options": [
+   "x = -6",
+   "x = -2",
+   "x = -4",
+   "x = -5"
+  ],
+  "shown_answer": "x = -2",
+  "shown_is_correct": false,
+  "magnitude": 6,
+  "score_level": 0
+ },
+ {
+  "id": 150,
+  "category": "7 complex numbers",
+  "prompt": "What is (4 + i) × (6 - 5i)?",
+  "answer": "29 - 14i",
+  "options": [
+   "29 + 14i",
+   "19 - 14i",
+   "29 - 14i",
+   "24 - 5i"
+  ],
+  "shown_answer": "19 - 14i",
+  "shown_is_correct": false,
+  "magnitude": 32.202484376209235,
+  "score_level": 1
+ },
+ {
+  "id": 151,
+  "category": "8 complex analysis",
+  "prompt": "What is |(3 + 4i) × (7 + 24i)|?",
+  "answer": "125",
+  "options": [
+   "30",
+   "125",
+   "117",
+   "130"
+  ],
+  "shown_answer": "125",
+  "shown_is_correct": true,
+  "magnitude": 125,
+  "score_level": 2
+ },
+ {
+  "id": 152,
+  "category": "9 calculus",
+  "prompt": "If f(x) = 1x³ - 6x² - 3x + 6, what is f′(-4)?",
+  "answer": "93",
+  "options": [
+   "-142",
+   "93",
+   "37",
+   "69"
+  ],
+  "shown_answer": "69",
+  "shown_is_correct": false,
+  "magnitude": 93,
+  "score_level": 1
+ },
+ {
+  "id": 153,
+  "category": "10 linear alg./number th.",
+  "prompt": "What is the sum of the eigenvalues of the matrix [[-7, -3], [-8, 5]]?",
+  "answer": "-2",
+  "options": [
+   "-35",
+   "-13",
+   "-2",
+   "-59"
+  ],
+  "shown_answer": "-13",
+  "shown_is_correct": false,
+  "magnitude": 2,
+  "score_level": 0
+ },
+ {
+  "id": 154,
+  "category": "11 physics: mechanics",
+  "prompt": "A ball is thrown straight up at 11 m/s. What maximum height does it reach? (g = 9.8 m/s²)",
+  "answer": "6.17 m",
+  "options": [
+   "0.561 m",
+   "1.12 m",
+   "12.3 m",
+   "6.17 m"
+  ],
+  "shown_answer": "1.12 m",
+  "shown_is_correct": false,
+  "magnitude": 6.173469387755102,
+  "score_level": 0
+ },
+ {
+  "id": 155,
+  "category": "12 physics: E&M/waves",
+  "prompt": "What is the electric force between charges of 5 μC and 5 μC placed 0.2 m apart? (k = 8.99 × 10⁹ N·m²/C²)",
+  "answer": "5.62 N",
+  "options": [
+   "11.2 N",
+   "1.12 N",
+   "5.62 N",
+   "0.562 N"
+  ],
+  "shown_answer": "5.62 N",
+  "shown_is_correct": true,
+  "magnitude": 5.6187499999999995,
+  "score_level": 0
+ },
+ {
+  "id": 156,
+  "category": "1 single-digit",
+  "prompt": "What is 1 + 8?",
+  "answer": "9",
+  "options": [
+   "11",
+   "7",
+   "8",
+   "9"
+  ],
+  "shown_answer": "9",
+  "shown_is_correct": true,
+  "magnitude": 9,
+  "score_level": 0
+ },
+ {
+  "id": 157,
+  "category": "2 multi-digit +/-",
+  "prompt": "What is 2586 - 354?",
+  "answer": "2232",
+  "options": [
+   "2122",
+   "2232",
+   "2204",
+   "2230"
+  ],
+  "shown_answer": "2122",
+  "shown_is_correct": false,
+  "magnitude": 2232,
+  "score_level": 3
+ },
+ {
+  "id": 158,
+  "category": "3 multiply/divide",
+  "prompt": "What is 1470 ÷ 49?",
+  "answer": "30",
+  "options": [
+   "31",
+   "30",
+   "36",
+   "34"
+  ],
+  "shown_answer": "34",
+  "shown_is_correct": false,
+  "magnitude": 30,
+  "score_level": 1
+ },
+ {
+  "id": 159,
+  "category": "4 fractions/%",
+  "prompt": "What is 0.7 × 3.7?",
+  "answer": "2.59",
+  "options": [
+   "3.49",
+   "2.59",
+   "1.49",
+   "25.9"
+  ],
+  "shown_answer": "2.59",
+  "shown_is_correct": true,
+  "magnitude": 2.59,
+  "score_level": 0
+ },
+ {
+  "id": 160,
+  "category": "5 powers/roots/order",
+  "prompt": "What is 7^4?",
+  "answer": "2401",
+  "options": [
+   "2401",
+   "2408",
+   "343",
+   "28"
+  ],
+  "shown_answer": "2401",
+  "shown_is_correct": true,
+  "magnitude": 2401,
+  "score_level": 3
+ },
+ {
+  "id": 161,
+  "category": "6 algebra",
+  "prompt": "Solve for x: x² - 13x + 40 = 0",
+  "answer": "x = 5 or x = 8",
+  "options": [
+   "x = 5 or x = 8",
+   "x = 1 or x = 40",
+   "x = -8 or x = -5",
+   "x = 5 or x = 9"
+  ],
+  "shown_answer": "x = 5 or x = 8",
+  "shown_is_correct": true,
+  "magnitude": 8,
+  "score_level": 0
+ },
+ {
+  "id": 162,
+  "category": "7 complex numbers",
+  "prompt": "What is the complex conjugate of -1 + 3i?",
+  "answer": "-1 - 3i",
+  "options": [
+   "-1 - 3i",
+   "3 - i",
+   "1 + 3i",
+   "1 - 3i"
+  ],
+  "shown_answer": "1 - 3i",
+  "shown_is_correct": false,
+  "magnitude": 3.1622776601683795,
+  "score_level": 0
+ },
+ {
+  "id": 163,
+  "category": "8 complex analysis",
+  "prompt": "What is e^(iπ·7/2)?",
+  "answer": "-i",
+  "options": [
+   "1",
+   "-i",
+   "i",
+   "-1"
+  ],
+  "shown_answer": "i",
+  "shown_is_correct": false,
+  "magnitude": 1.0,
+  "score_level": 0
+ },
+ {
+  "id": 164,
+  "category": "9 calculus",
+  "prompt": "If f(x) = 3x³ - 2x² - 1x + 4, what is f′(-2)?",
+  "answer": "43",
+  "options": [
+   "15",
+   "39",
+   "-26",
+   "43"
+  ],
+  "shown_answer": "39",
+  "shown_is_correct": false,
+  "magnitude": 43,
+  "score_level": 1
+ },
+ {
+  "id": 165,
+  "category": "10 linear alg./number th.",
+  "prompt": "What is the determinant of the matrix [[0, 4, 3], [1, 4, -3], [4, 4, 3]]?",
+  "answer": "-96",
+  "options": [
+   "24",
+   "96",
+   "-96",
+   "0"
+  ],
+  "shown_answer": "-96",
+  "shown_is_correct": true,
+  "magnitude": 96,
+  "score_level": 1
+ },
+ {
+  "id": 166,
+  "category": "11 physics: mechanics",
+  "prompt": "A car moving at 12 m/s accelerates at 4 m/s² for 5 s. What is its final speed?",
+  "answer": "32 m/s",
+  "options": [
+   "240 m/s",
+   "32 m/s",
+   "20 m/s",
+   "112 m/s"
+  ],
+  "shown_answer": "112 m/s",
+  "shown_is_correct": false,
+  "magnitude": 32,
+  "score_level": 1
+ },
+ {
+  "id": 167,
+  "category": "12 physics: E&M/waves",
+  "prompt": "How much energy, in millijoules, is stored in a 10 μF capacitor charged to 50 V?",
+  "answer": "12.5 mJ",
+  "options": [
+   "25 mJ",
+   "12500 mJ",
+   "12.5 mJ",
+   "0.25 mJ"
+  ],
+  "shown_answer": "12.5 mJ",
+  "shown_is_correct": true,
+  "magnitude": 12.5,
+  "score_level": 1
+ },
+ {
+  "id": 168,
+  "category": "1 single-digit",
+  "prompt": "What is 9 - 5?",
+  "answer": "4",
+  "options": [
+   "6",
+   "3",
+   "4",
+   "7"
+  ],
+  "shown_answer": "3",
+  "shown_is_correct": false,
+  "magnitude": 4,
+  "score_level": 0
+ },
+ {
+  "id": 169,
+  "category": "2 multi-digit +/-",
+  "prompt": "What is 6228 - 1838?",
+  "answer": "4390",
+  "options": [
+   "4370",
+   "4491",
+   "4467",
+   "4390"
+  ],
+  "shown_answer": "4491",
+  "shown_is_correct": false,
+  "magnitude": 4390,
+  "score_level": 3
+ },
+ {
+  "id": 170,
+  "category": "3 multiply/divide",
+  "prompt": "What is 45 × 20?",
+  "answer": "900",
+  "options": [
+   "878",
+   "938",
+   "883",
+   "900"
+  ],
+  "shown_answer": "883",
+  "shown_is_correct": false,
+  "magnitude": 900,
+  "score_level": 2
+ },
+ {
+  "id": 171,
+  "category": "4 fractions/%",
+  "prompt": "What is 75% of 60?",
+  "answer": "45",
+  "options": [
+   "90",
+   "22.5",
+   "45",
+   "67.5"
+  ],
+  "shown_answer": "45",
+  "shown_is_correct": true,
+  "magnitude": 45.0,
+  "score_level": 1
+ },
+ {
+  "id": 172,
+  "category": "5 powers/roots/order",
+  "prompt": "What is 5 + 3 × 8?",
+  "answer": "29",
+  "options": [
+   "30",
+   "29",
+   "27",
+   "64"
+  ],
+  "shown_answer": "29",
+  "shown_is_correct": true,
+  "magnitude": 29,
+  "score_level": 1
+ },
+ {
+  "id": 173,
+  "category": "6 algebra",
+  "prompt": "Solve for x: 4x - 18 = -26",
+  "answer": "x = -2",
+  "options": [
+   "x = -2",
+   "x = -5",
+   "x = -3",
+   "x = 1"
+  ],
+  "shown_answer": "x = -3",
+  "shown_is_correct": false,
+  "magnitude": 2,
+  "score_level": 0
+ },
+ {
+  "id": 174,
+  "category": "7 complex numbers",
+  "prompt": "What is (1 - i) + (-1 - 2i)?",
+  "answer": "-3i",
+  "options": [
+   "-2i",
+   "3i",
+   "-3i",
+   "2 + i"
+  ],
+  "shown_answer": "-3i",
+  "shown_is_correct": true,
+  "magnitude": 3.0,
+  "score_level": 0
+ },
+ {
+  "id": 175,
+  "category": "8 complex analysis",
+  "prompt": "Using De Moivre's theorem, what is (1 + i)^10?",
+  "answer": "32i",
+  "options": [
+   "16 + 16i",
+   "-32i",
+   "32i",
+   "1024"
+  ],
+  "shown_answer": "32i",
+  "shown_is_correct": true,
+  "magnitude": 32.0,
+  "score_level": 1
+ },
+ {
+  "id": 176,
+  "category": "9 calculus",
+  "prompt": "What is the definite integral of 3x² + 4x from x = 0 to x = 2?",
+  "answer": "16",
+  "options": [
+   "18",
+   "40",
+   "20",
+   "16"
+  ],
+  "shown_answer": "40",
+  "shown_is_correct": false,
+  "magnitude": 16,
+  "score_level": 1
+ },
+ {
+  "id": 177,
+  "category": "10 linear alg./number th.",
+  "prompt": "What is 3^17 mod 7?",
+  "answer": "5",
+  "options": [
+   "0",
+   "6",
+   "2",
+   "5"
+  ],
+  "shown_answer": "5",
+  "shown_is_correct": true,
+  "magnitude": 5,
+  "score_level": 0
+ },
+ {
+  "id": 178,
+  "category": "11 physics: mechanics",
+  "prompt": "A cart starts at 15 m/s and accelerates at 1 m/s² for 7 s. How far does it travel?",
+  "answer": "129.5 m",
+  "options": [
+   "24.5 m",
+   "129.5 m",
+   "105 m",
+   "154 m"
+  ],
+  "shown_answer": "154 m",
+  "shown_is_correct": false,
+  "magnitude": 129.5,
+  "score_level": 2
+ },
+ {
+  "id": 179,
+  "category": "12 physics: E&M/waves",
+  "prompt": "What is the electric force between charges of 8 μC and 9 μC placed 0.2 m apart? (k = 8.99 × 10⁹ N·m²/C²)",
+  "answer": "16.2 N",
+  "options": [
+   "32.4 N",
+   "3.24 N",
+   "16.2 N",
+   "1.62 N"
+  ],
+  "shown_answer": "16.2 N",
+  "shown_is_correct": true,
+  "magnitude": 16.181999999999995,
+  "score_level": 1
+ }
+]

@@ -1,0 +1,11 @@
+__pycache__/
+*.py[cod]
+.venv/
+# secrets: every .env variant except the committed example
+.env
+.env.*
+!.env.example
+.pytest_cache/
+.ruff_cache/
+.DS_Store
+dist/
