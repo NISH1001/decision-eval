@@ -47,14 +47,15 @@ def dated(model_id, run_date=None):
 NO_USAGE = {"input_tokens": None, "output_tokens": None, "cost_usd": 0.0, "request_id": None}
 
 
-def get(key, jev_model="typesafe/jev-1.14"):
-    """(predict, default worker count) for a backend key."""
+def get(key, jev_model="typesafe/jev-1.14", device="auto"):
+    """(predict, default worker count) for a backend key. `device` applies to the local models: auto, cpu, cuda,
+    or mps (Laya only)."""
     if key == "laya":
-        return laya_backend("english"), 1
+        return laya_backend("english", device), 1
     if key == "laya-typed":
-        return laya_backend("typed-decisions"), 1
+        return laya_backend("typed-decisions", device), 1
     if key == "gliner":
-        return gliner_backend(), 1
+        return gliner_backend(device=device), 1
     if key == "jev":
         return jev_backend(jev_model), 8
     if key == "gpt-6-luna":
@@ -104,14 +105,16 @@ def _hf_revision(repo):
     return ref.read_text().strip()[:7] if ref.exists() else "unknown"
 
 
-def laya_backend(checkpoint="english"):
+def laya_backend(checkpoint="english", device="auto"):
     from importlib.metadata import version
 
     from laya import Router
 
-    router = Router()
+    router = Router(device=None if device == "auto" else device)  # auto: cuda, then Apple MPS (Metal), then CPU
     router.preload([checkpoint])
-    model_id = f"convaiinnovations/laya@{_hf_revision('convaiinnovations/laya')} ({checkpoint}), laya {version('laya')}"
+    device = getattr(router.load(checkpoint), "device", "?")  # laya picks cuda, then Apple MPS (Metal), then CPU
+    model_id = (f"convaiinnovations/laya@{_hf_revision('convaiinnovations/laya')} ({checkpoint}), laya {version('laya')}, "
+                f"{device}")
 
     def predict(state, questions):
         res = router.predict(state, questions, model=checkpoint)
@@ -181,12 +184,23 @@ def openai_backend(model="gpt-6-luna"):
     return predict
 
 
-def gliner_backend(repo="nishparadox/gliner2.5-decide-onnx", onnx_file="model.onnx"):
-    """GLiNER2.5-Decide via its reference ONNX runtime, adapted to the Laya/Jev question format."""
+def gliner_backend(repo="nishparadox/gliner2.5-decide-onnx", onnx_file="model.onnx", device="auto"):
+    """GLiNER2.5-Decide via its reference ONNX runtime, adapted to the Laya/Jev question format.
+
+    device: cpu, cuda (needs the gliner-gpu extra, i.e. onnxruntime-gpu, and a working CUDA/cuDNN), or auto (cuda when
+    its provider is available, else cpu). CoreML is not offered: it supports only part of this graph and its Metal
+    compiler fails on it. A requested provider that does not end up active raises instead of falling back silently."""
     import importlib.util
 
+    import onnxruntime as ort
     from huggingface_hub import snapshot_download
 
+    has_cuda = "CUDAExecutionProvider" in ort.get_available_providers()
+    if device not in ("auto", "cpu", "cuda"):
+        raise SystemExit(f"gliner: device must be auto, cpu or cuda, not {device!r}")
+    if device == "cuda" and not has_cuda:
+        raise SystemExit("gliner: --device cuda needs the CUDA provider: install the gliner-gpu extra (onnxruntime-gpu) "
+                         f"on a machine with CUDA; available here: {ort.get_available_providers()}")
     path = Path(snapshot_download(repo, allow_patterns=[onnx_file, "tokenizer.json", "gliner_onnx.py"]))
     model_id = f"{repo}@{path.name[:7]}/{onnx_file}"  # snapshot dir name is the commit hash
     spec = importlib.util.spec_from_file_location("gliner_onnx", path / "gliner_onnx.py")
@@ -194,6 +208,12 @@ def gliner_backend(repo="nishparadox/gliner2.5-decide-onnx", onnx_file="model.on
     sys.modules["gliner_onnx"] = mod  # its dataclasses look the module up here
     spec.loader.exec_module(mod)
     model = mod.GlinerOnnx(str(path / onnx_file), str(path / "tokenizer.json"))
+    # the reference runtime pins the CPU provider; rebuild its session on the requested one
+    if device == "cuda" or (device == "auto" and has_cuda):
+        model.session = ort.InferenceSession(str(path / onnx_file), providers=["CUDAExecutionProvider", "CPUExecutionProvider"])
+        if model.session.get_providers()[0] != "CUDAExecutionProvider":
+            raise SystemExit(f"gliner: CUDA provider failed to initialise (check CUDA/cuDNN); got {model.session.get_providers()}")
+    model_id += f", {model.session.get_providers()[0]}"
 
     def clean(t):  # "(" and ")" are reserved in gliner2 prompts
         return t.replace("(", "[").replace(")", "]")

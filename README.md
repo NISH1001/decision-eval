@@ -35,6 +35,7 @@ input tokens × the list price (the Decisions endpoint bills input only).
 | suite | modes | items |
 |---|---|---|
 | `stem-synth` | choice, noul, score | 180 generated math and physics problems in 12 tiers, single-digit arithmetic to calculus, complex analysis and E&M; distractors are common mistakes |
+| `judgebench` | choice, noul | all 620 pairs of [JudgeBench](https://huggingface.co/datasets/ScalerLab/JudgeBench) (2024): a hard question and two long responses (GPT-4o or Claude 3.5 Sonnet), exactly one correct; pick it, or verify one. Question and responses go in the state; local encoders see only the start (Laya: a median 29% of each input) |
 | `guard-core` | flag (noul, choice, score) | reflex-guard's core guardrail set, test split: 322 prompts (104 harmful, 94 benign, 124 hard negatives), 8 harm categories; thresholds tuned on its dev split |
 | `guard-ood` | flag (noul, choice, score) | 988 prompts from Aegis 2.0, XSTest v2 and OR-Bench, scored with the core-dev thresholds (nothing tuned) |
 
@@ -53,6 +54,14 @@ R="git+https://github.com/NISH1001/decision-eval"
 uvx --from "$R" decision-eval suites
 uvx --from "decision-eval[laya] @ $R" decision-eval run --suite stem-synth --backend laya
 uvx --from "$R" decision-eval run --suite stem-synth --backend gpt-6-luna    # OPENAI_API_KEY in the environment
+```
+
+GPU for the local models: Laya picks CUDA (or Apple Metal) on its own. GLiNER needs the `gliner-gpu` extra
+(`onnxruntime-gpu`, Linux/Windows) instead of `gliner`, plus `--device cuda`; it stops rather than falling back to CPU
+if the CUDA provider does not start. `--tag` keeps such runs next to the default results instead of replacing them:
+
+```bash
+uvx --from "decision-eval[gliner-gpu] @ $R" decision-eval run --suite judgebench --backend gliner --device cuda --tag a100
 ```
 
 From a clone:

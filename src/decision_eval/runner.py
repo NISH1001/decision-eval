@@ -6,13 +6,20 @@ from concurrent.futures import ThreadPoolExecutor
 LABELS = "ABCDEFGH"
 
 
+def _criteria(suite, item):
+    """Choice criteria: by default the options themselves under A, B, ...; a suite whose options are long (the text
+    is in the state) supplies short labels instead via criteria(item). Keys always map to options in order."""
+    if hasattr(suite, "criteria"):
+        return suite.criteria(item)
+    return {LABELS[k]: o for k, o in enumerate(item["options"])}
+
+
 def request(suite, item):
     """(state, questions) for one item. Question keys are fixed per mode: mc, verify, size."""
     ins = suite.instructions(item)
     questions = {}
     if "choice" in suite.MODES:
-        crit = {LABELS[k]: o for k, o in enumerate(item["options"])}
-        questions["mc"] = dict(type="choice", instructions=ins["choice"], criteria=crit)
+        questions["mc"] = dict(type="choice", instructions=ins["choice"], criteria=_criteria(suite, item))
     if "noul" in suite.MODES:
         questions["verify"] = dict(type="noul", instructions=ins["noul"])
     if "score" in suite.MODES:
@@ -24,11 +31,12 @@ def score(suite, item, answers):
     """Per-mode correctness and probabilities for one item; columns of modes the suite lacks are left out."""
     row = {}
     if "choice" in suite.MODES:
-        crit = {LABELS[k]: o for k, o in enumerate(item["options"])}
+        crit = _criteria(suite, item)
         gold = LABELS[item["options"].index(item["answer"])]
         mc = answers["mc"]
         row.update(options=" | ".join(f"{k}:{v}" for k, v in crit.items()), gold_label=gold,
-                   mc_pred=mc["choice"], mc_pred_text=crit[mc["choice"]], mc_correct=mc["choice"] == gold,
+                   mc_pred=mc["choice"], mc_pred_text=item["options"][LABELS.index(mc["choice"])],
+                   mc_correct=mc["choice"] == gold,
                    mc_conf=max(mc["probabilities"].values()), mc_p_gold=mc["probabilities"][gold])
     if "noul" in suite.MODES:
         p_yes = float(answers["verify"]["noul"])  # noul answers come back as P(yes)

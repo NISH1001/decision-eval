@@ -53,10 +53,11 @@ def cmd_run(args):
         raise SystemExit(f"{items_path} holds a different item set (other -n / --seed?); move it aside first, "
                          "so results from different item sets never mix")
     items_path.write_text(json.dumps(items, indent=1, ensure_ascii=False))
-    predict, workers = backends.get(args.backend, args.jev_model)
+    predict, workers = backends.get(args.backend, args.jev_model, args.device)
     df = pd.DataFrame(run(suite, items, predict, workers=args.workers or workers))
-    df.to_csv(out / f"results_{args.backend}.csv", index=False)
-    print(f"wrote {out / f'results_{args.backend}.csv'} ({len(df)} items)")
+    name = f"results_{args.backend}" + (f".{args.tag}" if args.tag else "") + ".csv"
+    df.to_csv(out / name, index=False)
+    print(f"wrote {out / name} ({len(df)} items)")
     if df.cost_usd.sum():
         print(f"billed USD {df.cost_usd.sum():.6f}")
 
@@ -106,6 +107,10 @@ def main(argv=None):
     r.add_argument("--seed", type=int, help="item seed (default: the suite's)")
     r.add_argument("--workers", type=int, help="parallel requests (default: 8 for jev, 1 for local models)")
     r.add_argument("--jev-model", default="typesafe/jev-1.14")
+    r.add_argument("--device", default="auto", choices=["auto", "cpu", "cuda", "mps"],
+                   help="local models only: auto picks cuda, then mps (Laya), then cpu")
+    r.add_argument("--tag", help="suffix for the results file, e.g. a100 -> results_gliner.a100.csv, so runs on other "
+                                 "hardware sit next to the default ones instead of replacing them")
     r.set_defaults(fn=cmd_run)
     f = sub.add_parser("figures", help="paper figures and LaTeX table from every backend's results")
     f.add_argument("--suite", required=True)

@@ -59,14 +59,23 @@ def suite_payload(suite, items, dfs):
                 round(r["latency_s"] * 1000),
             ])
         models.append({"key": k, **MODELS[k], "model_id": str(d.model.iloc[0]), "summary": summary, "preds": preds})
+    present = {it["category"] for it in items}
+    cats = [c for c in suite.CATEGORIES if c in present]
+    groups = getattr(suite, "GROUPS", None)
+    groups = {g: [c for c in cs if c in present] for g, cs in groups.items() if any(c in present for c in cs)} if groups else None
+    limit = getattr(suite, "DISPLAY_CHARS", None)  # long-form suites: trim text for the page only
+
+    def cut(s):
+        return s if not (limit and isinstance(s, str) and len(s) > limit) else s[:limit].rstrip() + " …"
+
     meta = {"suite": suite.ID, "title": suite.TITLE, "n": len(items), "modes": modes,
-            "categories": suite.CATEGORIES, "groups": getattr(suite, "GROUPS", None),
+            "categories": cats, "groups": groups, "display_chars": limit,
             "chance": {m: c for m, (_, _, c) in ms.items()},
             "score_labels": getattr(suite, "SCORE_LABELS", None), "generated": date.today().isoformat()}
     return {"id": suite.ID, "title": suite.TITLE, "blurb": suite.BLURB, "meta": meta,
-            "items": [[it["category"], it["prompt"], it.get("options"),
+            "items": [[it["category"], cut(it["prompt"]), [cut(o) for o in it["options"]] if it.get("options") else None,
                        it["options"].index(it["answer"]) if it.get("options") else None,
-                       it.get("shown_answer"), it.get("shown_is_correct"), it.get("score_level")] for it in items],
+                       cut(it.get("shown_answer")), it.get("shown_is_correct"), it.get("score_level")] for it in items],
             "models": models}
 
 

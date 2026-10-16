@@ -52,3 +52,10 @@ def test_answers_keep_short_decimals():
     assert stem_synth.num(112.5) == "112.5"
     assert stem_synth.num(3307.5) == "3307.5"
     assert stem_synth.num(0.5875) == "0.588"
+
+
+def test_committed_judgebench_items():
+    """All 620 JudgeBench pairs (gpt then claude split), noul showing the correct response on exactly half."""
+    items = json.loads((Path(__file__).parents[1] / "results" / "judgebench" / "items.json").read_text())
+    assert len(items) == 620 and sum(it["shown_is_correct"] for it in items) == 310
+    assert all(it["answer"] in it["options"] and len(it["options"]) == 2 for it in items)

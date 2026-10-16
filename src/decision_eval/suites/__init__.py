@@ -10,6 +10,7 @@ A suite is a module with:
                                 shown_is_correct, score_level, ...}; fields for unused modes may be None
     state(item)              -> the state dict sent to the model
     instructions(item)       -> {mode: instruction text}; the runner attaches options and score labels
+    criteria(item)           -> optional short choice labels, for suites whose options are long (judgebench)
 
 A suite with TASK = "flag" (the guardrail suites) is binary detection instead: each mode gives P(flag)
 per item, and IMPORTED = True means its results come from elsewhere (see reflexguard.py), not `run`.
@@ -17,9 +18,9 @@ per item, and IMPORTED = True means its results come from elsewhere (see reflexg
 To add a suite, write the module and register it below.
 """
 
-from . import guard_core, guard_ood, stem_synth
+from . import guard_core, guard_ood, judgebench, stem_synth
 
-SUITES = {m.ID: m for m in (stem_synth, guard_core, guard_ood)}
+SUITES = {m.ID: m for m in (stem_synth, judgebench, guard_core, guard_ood)}
 
 
 def get(suite_id):
