@@ -1,11 +1,16 @@
-"""Model backends. Each returns predict(state, questions) -> (answers, model id, cost in USD, output tokens),
-with answers in the Laya / Jev decisions format: {qid: {"choice": ..., "probabilities": {...}} | {"noul": p}}.
+"""Model backends.
+
+Each backend is predict(state, questions) -> (answers, model id, usage), where answers are in the Laya / Jev
+decisions format, {qid: {"choice": ..., "probabilities": {...}} | {"noul": p}}, and usage is
+{input_tokens, output_tokens, cost_usd, request_id} (None where a backend has no such notion).
 """
 
+import datetime
 import json
 import os
 import sys
 import time
+import urllib.error
 import urllib.request
 import warnings
 from pathlib import Path
@@ -22,7 +27,15 @@ MODELS = {
                    params="~435M", runtime="local · ONNX Runtime"),
     "jev": dict(name="Jev", checkpoint="typesafe/jev-1.14 (OpenRouter)", encoder="undisclosed",
                 params="undisclosed", runtime="hosted · OpenRouter"),
+    "gpt-6-luna": dict(name="GPT-6 Luna", checkpoint="openai/gpt-6-luna (Decisions API, beta)", encoder="undisclosed",
+                       params="undisclosed", runtime="hosted · OpenAI"),
 }
+
+# OpenAI bills the Decisions endpoint for input tokens only (no output, cache-read or cache-write charges).
+# List price for gpt-6-luna as of 2026-10-16: https://developers.openai.com/api/docs/guides/decisions
+OPENAI_DECISIONS_USD_PER_INPUT_TOKEN = {"gpt-6-luna": 0.10 / 1e6}
+
+NO_USAGE = {"input_tokens": None, "output_tokens": None, "cost_usd": 0.0, "request_id": None}
 
 
 def get(key, jev_model="typesafe/jev-1.14"):
@@ -35,7 +48,43 @@ def get(key, jev_model="typesafe/jev-1.14"):
         return gliner_backend(), 1
     if key == "jev":
         return jev_backend(jev_model), 8
+    if key == "gpt-6-luna":
+        return openai_backend("gpt-6-luna"), 8
     raise SystemExit(f"unknown backend {key!r}; available: {', '.join(MODELS)}")
+
+
+def _api_key(name):
+    """The environment wins, then .env.local, then .env (see .env.example)."""
+    key = os.environ.get(name)
+    for env_file in (".env.local", ".env"):
+        if key or not Path(env_file).exists():
+            continue
+        for line in Path(env_file).read_text().splitlines():
+            if line.startswith(name + "="):
+                key = line.split("=", 1)[1].strip().strip("\"'") or None
+    if not key:
+        raise SystemExit(f"set {name} (environment, .env.local or .env; see .env.example)")
+    return key
+
+
+def _post(url, key, payload, attempts=4):
+    """POST JSON with retries on rate limits and transient errors; returns (response json, response headers)."""
+    body = json.dumps(payload).encode()
+    for attempt in range(attempts):
+        req = urllib.request.Request(url, data=body, headers={"Authorization": f"Bearer {key}",
+                                                              "Content-Type": "application/json"})
+        try:
+            with urllib.request.urlopen(req, timeout=60) as resp:
+                return json.load(resp), resp.headers
+        except urllib.error.HTTPError as e:
+            if e.code < 500 and e.code != 429 or attempt == attempts - 1:
+                raise SystemExit(f"{url}: HTTP {e.code}: {e.read().decode(errors='replace')[:500]}") from None
+            print(f"  retry after HTTP {e.code}")
+        except (urllib.error.URLError, TimeoutError) as e:
+            if attempt == attempts - 1:
+                raise
+            print(f"  retry after {e}")
+        time.sleep(2 ** attempt)
 
 
 def laya_backend(checkpoint="english"):
@@ -46,37 +95,68 @@ def laya_backend(checkpoint="english"):
 
     def predict(state, questions):
         res = router.predict(state, questions, model=checkpoint)
-        return res["answers"], res["routing"]["model"], 0.0, 0
+        return res["answers"], res["routing"]["model"], NO_USAGE
 
     return predict
 
 
 def jev_backend(model="typesafe/jev-1.14"):
-    key = os.environ.get("OPENROUTER_API_KEY")
-    for env_file in (".env.local", ".env"):  # the environment wins, then .env.local, then .env
-        if key or not Path(env_file).exists():
-            continue
-        for line in Path(env_file).read_text().splitlines():
-            if line.startswith("OPENROUTER_API_KEY="):
-                key = line.split("=", 1)[1].strip().strip("\"'") or None
-    if not key:
-        raise SystemExit("set OPENROUTER_API_KEY (environment, .env.local or .env; see .env.example)")
+    """Jev on OpenRouter's decisions API. The response names the dated snapshot (e.g. typesafe/jev-1.14-20261014)
+    and reports tokens and the billed cost."""
+    key = _api_key("OPENROUTER_API_KEY")
 
     def predict(state, questions):
-        body = json.dumps({"model": model, "state": state, "questions": questions}).encode()
-        for attempt in range(4):
-            req = urllib.request.Request("https://openrouter.ai/api/alpha/decisions", data=body, headers={
-                "Authorization": f"Bearer {key}", "Content-Type": "application/json"})
-            try:
-                with urllib.request.urlopen(req, timeout=60) as resp:
-                    res = json.load(resp)
-                usage = res.get("usage", {})
-                return res["answers"], res["model"], usage.get("cost", 0.0), usage.get("output_tokens", 0)
-            except Exception as e:  # rate limits / transient errors
-                if attempt == 3:
-                    raise
-                print(f"  retry after {e}")
-                time.sleep(2 ** attempt)
+        res, _ = _post("https://openrouter.ai/api/alpha/decisions", key,
+                       {"model": model, "state": state, "questions": questions})
+        u = res.get("usage", {})
+        return res["answers"], res["model"], {"input_tokens": u.get("input_tokens"),
+                                              "output_tokens": u.get("output_tokens"),
+                                              "cost_usd": u.get("cost", 0.0), "request_id": res.get("id")}
+
+    return predict
+
+
+def openai_backend(model="gpt-6-luna"):
+    """OpenAI's Decisions API (POST /v1/decisions, beta). Same questions, translated to its schema:
+    choice -> choice (choices: value + description), noul -> predicate (probability = P(yes)),
+    score -> score (levels, lowest first). The state is sent as its JSON text, the same object Jev receives.
+
+    The response names only the model alias (no dated snapshot is published), so the model id recorded is the
+    alias plus the model's `created` date from GET /v1/models/<model>. Cost is input tokens x the list price."""
+    key = _api_key("OPENAI_API_KEY")
+    meta = json.load(urllib.request.urlopen(urllib.request.Request(
+        f"https://api.openai.com/v1/models/{model}", headers={"Authorization": f"Bearer {key}"}), timeout=30))
+    created = datetime.datetime.fromtimestamp(meta["created"], datetime.UTC).date().isoformat()
+    price = OPENAI_DECISIONS_USD_PER_INPUT_TOKEN[model]
+
+    def translate(qid, q):
+        if q["type"] == "choice":
+            return {"type": "choice", "name": qid, "instructions": q["instructions"],
+                    "choices": [{"value": k, "description": v} for k, v in q["criteria"].items()]}
+        if q["type"] == "noul":
+            return {"type": "predicate", "name": qid, "instructions": q["instructions"]}
+        return {"type": "score", "name": qid, "instructions": q["instructions"],
+                "levels": [{"label": c, "description": c} for c in q["criteria"]]}
+
+    def predict(state, questions):
+        res, headers = _post("https://api.openai.com/v1/decisions", key, {
+            "model": model, "input": json.dumps(state, ensure_ascii=False),
+            "questions": [translate(qid, q) for qid, q in questions.items()]})
+        answers = {}
+        for a in res["answers"]:
+            if a["type"] == "refusal":
+                raise SystemExit(f"{model} refused question {a['name']!r}: {a}")
+            if a["type"] == "predicate":
+                answers[a["name"]] = {"noul": a["probability"]}
+            elif a["type"] == "choice":
+                answers[a["name"]] = {"choice": a["choice"],
+                                      "probabilities": {p["value"]: p["probability"] for p in a["probabilities"]}}
+            else:  # score: probabilities keyed by level index, as the other backends return them
+                answers[a["name"]] = {"probabilities": {str(p["value"]): p["probability"] for p in a["probabilities"]}}
+        u = res.get("usage", {})
+        return answers, f"{res['model']} (created {created})", {
+            "input_tokens": u.get("input_tokens"), "output_tokens": u.get("output_tokens"),
+            "cost_usd": (u.get("input_tokens") or 0) * price, "request_id": headers.get("x-request-id")}
 
     return predict
 
@@ -118,6 +198,6 @@ def gliner_backend(repo="nishparadox/gliner2.5-decide-onnx", onnx_file="model.on
                 continue
             pr = {back[qid][lab]: p for lab, p in probs[qid].items()}
             answers[qid] = {"choice": max(pr, key=pr.get), "probabilities": pr}
-        return answers, f"{repo}/{onnx_file}", 0.0, 0
+        return answers, f"{repo}/{onnx_file}", NO_USAGE
 
     return predict

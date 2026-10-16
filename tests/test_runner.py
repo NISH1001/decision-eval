@@ -26,9 +26,10 @@ def test_scoring_with_a_perfect_fake_model():
         return ({"mc": {"choice": gold, "probabilities": {k: float(k == gold) for k in "ABCD"}},
                  "verify": {"noul": 1.0 if it["shown_is_correct"] else 0.0},
                  "size": {"probabilities": {str(k): float(k == it["score_level"]) for k in range(5)}}},
-                "oracle", 0.0, 0)
+                "oracle", {"input_tokens": 10, "output_tokens": 0, "cost_usd": 1e-6, "request_id": "req_x"})
 
     ITEMS = stem_synth.build(n=24)
     rows = run(stem_synth, ITEMS, oracle)
     assert all(r["mc_correct"] and r["verify_correct"] and r["score_correct"] for r in rows)
     assert all(r["mc_conf"] == 1.0 and r["score_abs_err"] == 0 for r in rows)
+    assert all(r["input_tokens"] == 10 and r["cost_usd"] == 1e-6 and r["request_id"] == "req_x" for r in rows)

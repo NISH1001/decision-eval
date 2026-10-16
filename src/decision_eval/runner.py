@@ -45,9 +45,10 @@ def score(suite, item, answers):
 def run_one(suite, item, predict):
     state, questions = request(suite, item)
     t0 = time.perf_counter()
-    answers, model, cost, out_tokens = predict(state, questions)
+    answers, model, usage = predict(state, questions)
     dt = time.perf_counter() - t0
-    row = {**item, **score(suite, item, answers), "latency_s": dt, "cost_usd": cost, "output_tokens": out_tokens,
+    row = {**item, **score(suite, item, answers), "latency_s": dt, "input_tokens": usage["input_tokens"],
+           "output_tokens": usage["output_tokens"], "cost_usd": usage["cost_usd"], "request_id": usage["request_id"],
            "model": model}
     marks = " ".join(f"{k}={'✓' if row[c] else '✗'}" for k, c in
                      (("mc", "mc_correct"), ("ver", "verify_correct"), ("size", "score_correct")) if c in row)

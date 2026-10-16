@@ -23,6 +23,12 @@ sends byte-identical requests to every model.
 | `laya-typed` | [convaiinnovations/laya-typed-decisions](https://huggingface.co/convaiinnovations/laya-typed-decisions) | local, PyTorch |
 | `gliner` | [fastino/GLiNER2.5-Decide](https://huggingface.co/fastino/GLiNER2.5-Decide) via [an fp32 ONNX export](https://huggingface.co/nishparadox/gliner2.5-decide-onnx) | local, ONNX Runtime |
 | `jev` | [typesafe/jev-1.14](https://openrouter.ai/typesafe/jev-1.14) | hosted, OpenRouter decisions API |
+| `gpt-6-luna` | [gpt-6-luna](https://developers.openai.com/api/docs/guides/decisions) | hosted, OpenAI Decisions API (beta) |
+
+Hosted backends record per item: input and output tokens, the billed cost, the API request id, and the exact
+model version the API reports. Jev returns a dated snapshot (`typesafe/jev-1.14-20261014`). OpenAI returns only
+the alias, so the recorded id adds the model's `created` date from `GET /v1/models/gpt-6-luna`; its cost is
+input tokens × the list price (the Decisions endpoint bills input only).
 
 ## Suites
 
@@ -33,13 +39,14 @@ sends byte-identical requests to every model.
 ## Usage
 
 ```bash
-cp .env.example .env            # only the jev backend needs a key (OPENROUTER_API_KEY)
+cp .env.example .env            # hosted backends: OPENROUTER_API_KEY (jev), OPENAI_API_KEY (gpt-6-luna)
 
 uv run decision-eval suites
 uv run --extra laya   decision-eval run --suite stem-synth --backend laya
 uv run --extra laya   decision-eval run --suite stem-synth --backend laya-typed
 uv run --extra gliner decision-eval run --suite stem-synth --backend gliner
 uv run                decision-eval run --suite stem-synth --backend jev
+uv run                decision-eval run --suite stem-synth --backend gpt-6-luna
 
 uv run --extra figures decision-eval figures --suite stem-synth     # paper figures (PDF/PNG) + LaTeX table
 uv run decision-eval export --suite stem-synth --post <post.md>     # embed results in the results page

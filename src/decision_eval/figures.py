@@ -9,6 +9,7 @@ STYLE = {  # Okabe–Ito (colorblind-safe), each with its own hatch so print / g
     "Laya typed": dict(color="#56B4E9", hatch="\\\\\\", marker="s", ls="--"),
     "GLiNER": dict(color="#009E73", hatch="...", marker="^", ls="-."),
     "Jev": dict(color="#D55E00", hatch="xx", marker="D", ls=":"),
+    "GPT-6 Luna": dict(color="#CC79A7", hatch="---", marker="v", ls=(0, (5, 1, 1, 1))),
 }
 
 
