@@ -38,6 +38,17 @@ input tokens × the list price (the Decisions endpoint bills input only).
 
 ## Usage
 
+Without cloning, straight from GitHub (results go to `./results/`):
+
+```bash
+R="git+https://github.com/NISH1001/decision-eval"
+uvx --from "$R" decision-eval suites
+uvx --from "decision-eval[laya] @ $R" decision-eval run --suite stem-synth --backend laya
+uvx --from "$R" decision-eval run --suite stem-synth --backend gpt-6-luna    # OPENAI_API_KEY in the environment
+```
+
+From a clone:
+
 ```bash
 cp .env.example .env            # hosted backends: OPENROUTER_API_KEY (jev), OPENAI_API_KEY (gpt-6-luna)
 
