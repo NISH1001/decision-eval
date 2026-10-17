@@ -5,16 +5,15 @@ from pathlib import Path
 import pytest
 
 from decision_eval.runner import request
-from decision_eval.suites import redef, redef_commit, redef_message
+from decision_eval.suites import redef, redef_commit
 
 RESULTS = Path(__file__).parents[1] / "results"
 ITEMS = json.loads((RESULTS / "redef" / "items.json").read_text())
 
 
 def test_variants_share_the_items():
-    """The three variants differ only in what goes in the state, so their scores compare item for item."""
-    for sid in ("redef-commit", "redef-message"):
-        assert json.loads((RESULTS / sid / "items.json").read_text()) == ITEMS
+    """The two variants differ only in what goes in the state, so their scores compare item for item."""
+    assert json.loads((RESULTS / "redef-commit" / "items.json").read_text()) == ITEMS
 
 
 def test_balanced_and_stratified():
@@ -28,8 +27,7 @@ def test_balanced_and_stratified():
 
 
 @pytest.mark.parametrize("suite,keys", [(redef, {"file", "function", "diff"}),
-                                        (redef_commit, {"file", "function", "commit_message", "diff"}),
-                                        (redef_message, {"file", "function", "commit_message"})])
+                                        (redef_commit, {"file", "function", "commit_message", "diff"})])
 def test_state_never_carries_the_label(suite, keys):
     state, questions = request(suite, ITEMS[0])
     assert set(state) == keys and set(questions) == {"mc", "verify"}

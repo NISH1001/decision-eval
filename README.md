@@ -38,7 +38,6 @@ input tokens × the list price (the Decisions endpoint bills input only).
 | `judgebench` | choice, noul | all 620 pairs of [JudgeBench](https://huggingface.co/datasets/ScalerLab/JudgeBench) (2024): a hard question and two long responses (GPT-4o or Claude 3.5 Sonnet), exactly one correct; pick it, or verify one. Question and responses go in the state; local encoders see only the start (Laya: a median 29% of each input) |
 | `redef` | choice, noul | 100 buggy + 100 clean real function-level changes from 22 C/C++ projects, from the validation split of [ReDef](https://arxiv.org/abs/2509.09192) (FSE 2026, MIT): does this change introduce a bug (noul, gold `defective_modification`), and which of ReDef's four kinds of change is it (choice, gold `commit_type`)? The model sees only the file, the function name and the diff, as when an assistant edits a file |
 | `redef-commit` | choice, noul | the same 200 changes with the commit message added to the diff, as in a PR review |
-| `redef-message` | choice, noul | control: the same 200 with the commit message and no code |
 | `guard-core` | flag (noul, choice, score) | reflex-guard's core guardrail set, test split: 322 prompts (104 harmful, 94 benign, 124 hard negatives), 8 harm categories; thresholds tuned on its dev split |
 | `guard-ood` | flag (noul, choice, score) | 988 prompts from Aegis 2.0, XSTest v2 and OR-Bench, scored with the core-dev thresholds (nothing tuned) |
 
