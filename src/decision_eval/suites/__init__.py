@@ -18,9 +18,9 @@ per item, and IMPORTED = True means its results come from elsewhere (see reflexg
 To add a suite, write the module and register it below.
 """
 
-from . import guard_core, guard_ood, judgebench, stem_synth
+from . import guard_core, guard_ood, judgebench, redef, redef_commit, redef_message, stem_synth
 
-SUITES = {m.ID: m for m in (stem_synth, judgebench, guard_core, guard_ood)}
+SUITES = {m.ID: m for m in (stem_synth, judgebench, redef, redef_commit, redef_message, guard_core, guard_ood)}
 
 
 def get(suite_id):
