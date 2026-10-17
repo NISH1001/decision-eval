@@ -58,7 +58,7 @@ def fig_by_category(dfs, suite, items, out):
             _bars(ax, x, [fn(d[d.category == c]) for c in cats], n, i, len(names), w)
         ax.axhline(chance, color="#222222", ls=(0, (4, 2)), lw=0.8, zorder=3)
         ax.text(-1.45, chance + 0.015, f"chance\n{chance:.0%}", ha="left", va="bottom", fontsize=7, linespacing=0.9)
-        if mode == "score":  # a model that always guesses the category's most common level
+        if mode == "score" and not hasattr(suite, "SCORE_FLAG_AT"):  # always guessing the category's most common level
             d0 = dfs[names[0]]
             maj = [d0[d0.category == c].score_level.value_counts(normalize=True).max() for c in cats]
             ax.scatter(x, maj, marker="_", s=260, color="#222222", lw=1.4, zorder=4, label="most-common-level baseline")

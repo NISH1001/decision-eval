@@ -4,14 +4,14 @@ import numpy as np
 import pandas as pd
 
 
-def balanced_acc(d):
+def balanced_acc(d, col="verify_correct"):
     """Mean of the accuracies on correct and on wrong shown answers: a constant answer scores exactly 0.5."""
-    return np.mean([d[d.shown_is_correct == t].verify_correct.mean() for t in (True, False)
+    return np.mean([d[d.shown_is_correct == t][col].mean() for t in (True, False)
                     if (d.shown_is_correct == t).any()])
 
 
-def auc(d):
-    t, f = d[d.shown_is_correct].verify_p_yes.values, d[~d.shown_is_correct].verify_p_yes.values
+def auc(d, col="verify_p_yes"):
+    t, f = d[d.shown_is_correct][col].values, d[~d.shown_is_correct][col].values
     return ((t[:, None] > f[None, :]) + 0.5 * (t[:, None] == f[None, :])).mean()
 
 
@@ -22,7 +22,9 @@ def metrics(suite, items):
         out["choice"] = ("Choice accuracy", lambda d: d.mc_correct.mean(), 1 / len(items[0]["options"]))
     if "noul" in suite.MODES:
         out["noul"] = ("Verify balanced accuracy", balanced_acc, 0.5)
-    if "score" in suite.MODES:
+    if "score" in suite.MODES and hasattr(suite, "SCORE_FLAG_AT"):  # a level at or above the cutoff says yes
+        out["score"] = ("Score balanced accuracy", lambda d: balanced_acc(d, "score_correct"), 0.5)
+    elif "score" in suite.MODES:
         out["score"] = ("Score-level accuracy", lambda d: d.score_correct.mean(), 1 / len(suite.SCORE_LABELS))
     return out
 
@@ -44,7 +46,10 @@ def summary_table(dfs, suite, items):
         if "noul" in suite.MODES:
             row["Verify AUC"] = auc(d)
             row["Says yes"] = d.verify_pred.mean()
-        if "score" in suite.MODES:
+        if "score" in suite.MODES and hasattr(suite, "SCORE_FLAG_AT"):
+            row["Score AUC"] = auc(d, "score_risk")
+            row["Score flags"] = d.score_flag.mean()
+        elif "score" in suite.MODES:
             row["Score-level MAE"] = d.score_abs_err.mean()
         row["Median latency (ms)"] = d.latency_s.median() * 1000
         row["Cost (USD)"] = d.cost_usd.sum()

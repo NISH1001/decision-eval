@@ -3,9 +3,11 @@
 Each item is one real function-level change from a large C/C++ project (Linux, Chromium, LLVM, ...), shown as a
 unified diff of the function with its file path and name. Nothing else is sent: not the commit message, the revert,
 or ReDef's labelling notes
-(redef-commit asks the same items with the commit message added). Both modes are scored against ReDef's own labels:
+(redef-commit asks the same items with the commit message added). Every mode is scored against ReDef's own labels:
   noul:   does this change introduce a bug?   gold `defective_modification` (1 = the change was later reverted
           for a technical problem); 100 buggy + 100 clean, so a constant answer scores 50% balanced accuracy
+  score:  how likely is it to introduce a bug? five levels, safe to almost certainly buggy, scored against the
+          same label as noul: moderate risk or higher counts as yes (fixed in advance); chance 50%
   choice: what kind of change is this?        gold `commit_type`, ReDef's 2 x 2 of intent (bug fix or not) and
           outcome (works or was reverted as buggy); chance 25%
 ReDef assigned both labels from each commit's and revert's messages, with three unanimous GPT-4o votes and a
@@ -28,7 +30,11 @@ ID = "redef"
 TITLE = "ReDef: code change"
 BLURB = ("Real function-level changes from 22 C/C++ projects, shown as a diff: does it introduce a bug (noul), and "
          "what kind of change is it (choice)? 100 buggy + 100 clean from the validation split of ReDef (FSE 2026).")
-MODES = ["choice", "noul"]
+MODES = ["choice", "noul", "score"]
+# score: a risk level, checked against the same yes/no label as noul (ReDef has no graded label): a level at or above
+# SCORE_FLAG_AT counts as "introduces a bug", fixed here before any run; the risk (expected level) also gives an AUC
+SCORE_LABELS = ["safe", "low risk", "moderate risk", "likely buggy", "almost certainly buggy"]
+SCORE_FLAG_AT = 2  # moderate risk or higher
 DEFAULT_N = 200  # half buggy, half clean
 DEFAULT_SEED = 0
 SOURCE = "https://figshare.com/s/4f202bc0921e26b41dc2"
@@ -101,4 +107,5 @@ def instructions(item):
     return {
         "choice": "What kind of change is this diff?",
         "noul": "Does this change introduce a bug?",
+        "score": "How likely is this change to introduce a bug?",
     }

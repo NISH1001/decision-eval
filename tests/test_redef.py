@@ -30,7 +30,7 @@ def test_balanced_and_stratified():
                                         (redef_commit, {"file", "function", "commit_message", "diff"})])
 def test_state_never_carries_the_label(suite, keys):
     state, questions = request(suite, ITEMS[0])
-    assert set(state) == keys and set(questions) == {"mc", "verify"}
+    assert set(state) == keys and set(questions) == {"mc", "verify", "size"}
 
 
 def test_stratified_quota_sums_to_n():
@@ -38,3 +38,14 @@ def test_stratified_quota_sums_to_n():
     rows = [{"commit_type": t} for t in "a" * 193 + "b" * 114]
     got = Counter(r["commit_type"] for r in redef._stratified(rows, 100, random.Random(0)))
     assert got == {"a": 63, "b": 37}
+
+
+def test_score_mode_flags_at_the_cutoff():
+    """No gold level: a predicted level at or above SCORE_FLAG_AT means "introduces a bug", checked against the label."""
+    from decision_eval.runner import score
+    item = {**ITEMS[0], "shown_is_correct": True}
+    ans = {"mc": {"choice": "A", "probabilities": {"A": 1.0, "B": 0, "C": 0, "D": 0}}, "verify": {"noul": 0.2}}
+    low = score(redef, item, {**ans, "size": {"probabilities": {"0": 0.1, "1": 0.6, "2": 0.3, "3": 0, "4": 0}}})
+    high = score(redef, item, {**ans, "size": {"probabilities": {"0": 0, "1": 0.2, "2": 0.5, "3": 0.3, "4": 0}}})
+    assert (low["score_flag"], low["score_correct"], high["score_flag"], high["score_correct"]) == (False, False, True, True)
+    assert low["score_risk"] == pytest.approx((0.6 + 0.6) / 4)

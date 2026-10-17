@@ -4,8 +4,8 @@ redef is the on-the-fly case (an assistant edits a file; only the code change ex
 where the author's description comes with the change. The difference between the two is what the message adds.
 """
 
-from .redef import (CATEGORIES, DEFAULT_N, DEFAULT_SEED, DISPLAY_CHARS, GROUPS, MODES, SOURCE,  # noqa: F401
-                    build, instructions)
+from .redef import (CATEGORIES, DEFAULT_N, DEFAULT_SEED, DISPLAY_CHARS, GROUPS, MODES, SCORE_FLAG_AT,  # noqa: F401
+                    SCORE_LABELS, SOURCE, build, instructions)
 
 ID = "redef-commit"
 TITLE = "ReDef: code + commit"

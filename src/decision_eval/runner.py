@@ -45,8 +45,13 @@ def score(suite, item, answers):
     if "score" in suite.MODES:
         sp = {int(k): v for k, v in answers["size"]["probabilities"].items()}
         pred, gold = max(sp, key=sp.get), item["score_level"]
-        row.update(score_pred=pred, score_correct=pred == gold, score_abs_err=abs(pred - gold),
-                   score_p_gold=sp.get(gold, 0.0))
+        if hasattr(suite, "SCORE_FLAG_AT"):  # levels of a yes/no target (risk of a bug): no gold level exists
+            flag = pred >= suite.SCORE_FLAG_AT
+            row.update(score_pred=pred, score_risk=sum(k * p for k, p in sp.items()) / (len(suite.SCORE_LABELS) - 1),
+                       score_flag=flag, score_correct=flag == item["shown_is_correct"])
+        else:
+            row.update(score_pred=pred, score_correct=pred == gold, score_abs_err=abs(pred - gold),
+                       score_p_gold=sp.get(gold, 0.0))
     return row
 
 

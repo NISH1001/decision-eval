@@ -43,7 +43,9 @@ def suite_payload(suite, items, dfs):
         summary = {m: [s[ms[m][0]], *s[ms[m][0] + " CI"]] for m in ms}
         if "noul" in modes:
             summary.update(auc=s["Verify AUC"], says_yes=s["Says yes"])
-        if "score" in modes:
+        if "score" in modes and hasattr(suite, "SCORE_FLAG_AT"):
+            summary.update(score_auc=s["Score AUC"], score_flags=s["Score flags"])
+        elif "score" in modes:
             summary["mae"] = s["Score-level MAE"]
         summary.update(latency_ms=s["Median latency (ms)"], cost_usd=float(d.cost_usd.sum()))
         if "input_tokens" in d and d.input_tokens.notna().any():  # hosted backends only; local models have none
@@ -71,7 +73,8 @@ def suite_payload(suite, items, dfs):
     meta = {"suite": suite.ID, "title": suite.TITLE, "n": len(items), "modes": modes,
             "categories": cats, "groups": groups, "display_chars": limit,
             "chance": {m: c for m, (_, _, c) in ms.items()},
-            "score_labels": getattr(suite, "SCORE_LABELS", None), "generated": date.today().isoformat()}
+            "score_labels": getattr(suite, "SCORE_LABELS", None), "score_flag_at": getattr(suite, "SCORE_FLAG_AT", None),
+            "generated": date.today().isoformat()}
     return {"id": suite.ID, "title": suite.TITLE, "blurb": suite.BLURB, "meta": meta,
             "items": [[it["category"], cut(it["prompt"]), [cut(o) for o in it["options"]] if it.get("options") else None,
                        it["options"].index(it["answer"]) if it.get("options") else None,
