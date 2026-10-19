@@ -29,6 +29,9 @@ MODELS = {
                 params="undisclosed", runtime="hosted · OpenRouter"),
     "gpt-6-luna": dict(name="GPT-6 Luna", checkpoint="openai/gpt-6-luna (Decisions API, beta)", encoder="undisclosed",
                        params="undisclosed", runtime="hosted · OpenAI"),
+    "d1-ultra": dict(name="d1-ultra", checkpoint="liquid/d1-ultra (OpenRouter)",
+                     encoder="undisclosed (built on a larger open-weight model)", params="undisclosed",
+                     runtime="hosted · OpenRouter"),
 }
 
 # OpenAI bills the Decisions endpoint for input tokens only (no output, cache-read or cache-write charges).
@@ -60,6 +63,8 @@ def get(key, jev_model="typesafe/jev-1.14", device="auto"):
         return jev_backend(jev_model), 8
     if key == "gpt-6-luna":
         return openai_backend("gpt-6-luna"), 8
+    if key == "d1-ultra":  # Liquid AI's d1-ultra, on the same OpenRouter decisions API as Jev
+        return jev_backend("liquid/d1-ultra"), 8
     raise SystemExit(f"unknown backend {key!r}; available: {', '.join(MODELS)}")
 
 
@@ -124,8 +129,8 @@ def laya_backend(checkpoint="english", device="auto"):
 
 
 def jev_backend(model="typesafe/jev-1.14"):
-    """Jev on OpenRouter's decisions API. The response names the dated snapshot (e.g. typesafe/jev-1.14-20261014)
-    and reports tokens and the billed cost."""
+    """A model on OpenRouter's decisions API (Jev by default; also liquid/d1-ultra). The response names the dated
+    snapshot (e.g. typesafe/jev-1.14-20261014) and reports tokens and the billed cost."""
     key = _api_key("OPENROUTER_API_KEY")
 
     def predict(state, questions):
