@@ -6,7 +6,17 @@
   "laya": "laya",
   "gliner": "gliner:fp32:orders=3",
   "jev": "jev",
-  "gpt-6-luna": "openai"
+  "gpt-6-luna": "openai",
+  "laya-typed": "laya-typed",
+  "d1-ultra": "d1-ultra"
  },
- "thresholds": "per model and mode: best balanced accuracy on the core dev split"
+ "thresholds": "per model and mode: best balanced accuracy on the core dev split",
+ "model_commits": {
+  "laya": "999d51d",
+  "gliner": "999d51d",
+  "jev": "999d51d",
+  "gpt-6-luna": "999d51d",
+  "laya-typed": "89fa938",
+  "d1-ultra": "89fa938"
+ }
 }

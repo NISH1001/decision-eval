@@ -90,7 +90,7 @@ def cmd_export(args):
 def cmd_import_reflexguard(args):
     from .reflexguard import import_all
 
-    commit, written = import_all(args.repo, args.results, {})
+    commit, written = import_all(args.repo, args.results, {}, args.models.split(",") if args.models else None)
     for suite, keys in written.items():
         print(f"{suite}: {', '.join(keys)}  (reflex-guard @ {commit})")
 
@@ -121,6 +121,7 @@ def main(argv=None):
     e.set_defaults(fn=cmd_export)
     i = sub.add_parser("import-reflexguard", help="import the guardrail suites from a reflex-guard checkout")
     i.add_argument("--repo", required=True, help="path to the reflex-guard repository")
+    i.add_argument("--models", help="comma-separated backends to import (default: all); others are left as they are")
     i.set_defaults(fn=cmd_import_reflexguard)
     args = p.parse_args(argv)
     args.fn(args)

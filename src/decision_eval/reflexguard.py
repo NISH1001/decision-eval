@@ -22,7 +22,11 @@ import pandas as pd
 
 MODES = ["noul", "choice", "score"]
 # decision-eval backend key -> reflex-guard cache model name
-MODELS = {"laya": "laya", "gliner": "gliner:fp32:orders=3", "jev": "jev", "gpt-6-luna": "openai"}
+MODELS = {"laya": "laya", "gliner": "gliner:fp32:orders=3", "jev": "jev", "gpt-6-luna": "openai",
+          # run by decision-eval with reflex-guard's own scripts/eval.py (at 89fa938) on an unmodified copy of the
+          # repo: d1-ultra as JevGuard(model="liquid/d1-ultra-20261015"), laya-typed as LayaGuard routed to the
+          # typed-decisions checkpoint
+          "laya-typed": "laya-typed", "d1-ultra": "d1-ultra"}
 SETS = {"guard-core": "data/eval", "guard-ood": "data/eval/ood"}
 
 # Exact versions. Hosted models' come from the `served` field of every cache entry; local ones are not in the cache
@@ -31,6 +35,7 @@ SETS = {"guard-core": "data/eval", "guard-ood": "data/eval/ood"}
 MODEL_IDS = {
     "laya": "convaiinnovations/laya@7b928d8 (english, via Router), laya 0.3.20",
     "gliner": "nishparadox/gliner2.5-decide-onnx@bbbcdb0 (fp32; noul averaged over 3 label orders)",
+    "laya-typed": "convaiinnovations/laya@7b928d8 (typed-decisions, via Router), laya 0.3.20",
 }
 
 # Jev's cache entries carry no date; both sets were run on the day of reflex-guard commit 4ac8c81.
@@ -47,6 +52,9 @@ COSTS = {
                                    "billed": False},
     ("guard-ood", "gpt-6-luna"): {"requests": 3326, "input_tokens": 3699504, "cost_usd": 3699504 * 0.10 / 1e6,
                                   "billed": False},
+    # d1-ultra: OpenRouter's billed usage.cost from the run log (core includes a 5-prompt smoke test, 18 requests)
+    ("guard-core", "d1-ultra"): {"requests": 2076, "input_tokens": 1050647, "cost_usd": 0.0442, "billed": True},
+    ("guard-ood", "d1-ultra"): {"requests": 2967, "input_tokens": 1311241, "cost_usd": 0.0551, "billed": True},
 }
 
 
@@ -107,11 +115,12 @@ def _frame(rows, categories, per_id, thresholds, model_id):
     return pd.DataFrame(recs)
 
 
-def import_all(repo, out_root, model_ids):
+def import_all(repo, out_root, model_ids, keys=None):
     """Write results/<suite>/{items.json, results_<backend>.csv, provenance.json} for guard-core and guard-ood.
 
     model_ids: backend key -> the exact model version string to record (local models' revisions are not in the
-    cache, so they are passed in)."""
+    cache, so they are passed in). keys: import only these backends, leaving the others' results and provenance
+    as they are (each model records the reflex-guard commit its cache came from)."""
     repo = Path(repo).expanduser()
     commit = subprocess.run(["git", "-C", str(repo), "rev-parse", "--short", "HEAD"], capture_output=True,
                             text=True).stdout.strip() or "unknown"
@@ -121,6 +130,8 @@ def import_all(repo, out_root, model_ids):
     test = [r for r in core_rows if r["split"] == "test"]
     written = {}
     for key, rg_model in MODELS.items():
+        if keys and key not in keys:
+            continue
         core = _scores(repo, SETS["guard-core"], rg_model, core_rows, core_cats)
         thresholds = {m: best_threshold([(max(core[r["id"]][m][0].values()), r["kind"] == "harmful") for r in dev])
                       for m in MODES}
@@ -143,11 +154,16 @@ def import_all(repo, out_root, model_ids):
         items = [{"id": r["id"], "prompt": r["prompt"], "kind": r["kind"], "domain": r["domain"],
                   "labels": [c for c in r["categories"].split(";") if c], "split": r["split"], "source": r["source"],
                   "pair_id": r["pair_id"] or None} for r in rows]
+        if (d / "items.json").exists() and keys:  # a partial import must score exactly the same prompts
+            assert json.loads((d / "items.json").read_text()) == items, f"{suite}: prompts differ from {repo}"
         (d / "items.json").write_text(json.dumps(items, indent=1, ensure_ascii=False))
         (d / "categories.json").write_text(json.dumps(cats, indent=1))
-        (d / "provenance.json").write_text(json.dumps({
-            "source": "github.com/NISH1001/reflex-guard", "commit": commit, "set": SETS[suite],
-            "models": {k: MODELS[k] for k in written[suite]},
-            "thresholds": "per model and mode: best balanced accuracy on the core dev split",
-        }, indent=1))
+        prov_path = d / "provenance.json"
+        prov = json.loads(prov_path.read_text()) if keys and prov_path.exists() else {}
+        commits = prov.get("model_commits") or {k: prov["commit"] for k in prov.get("models", {})}
+        prov.update({"source": "github.com/NISH1001/reflex-guard", "commit": prov.get("commit", commit),
+                     "set": SETS[suite], "models": {**prov.get("models", {}), **{k: MODELS[k] for k in written[suite]}},
+                     "model_commits": {**commits, **{k: commit for k in written[suite]}},
+                     "thresholds": "per model and mode: best balanced accuracy on the core dev split"})
+        prov_path.write_text(json.dumps(prov, indent=1))
     return commit, written
