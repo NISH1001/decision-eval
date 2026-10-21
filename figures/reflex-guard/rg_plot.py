@@ -1,4 +1,4 @@
-"""Draw reflex-guard's overview figures (scripts/plot_eval.py, unchanged) with d1-ultra and Laya typed added to STYLE.
+"""Draw reflex-guard's overview, per-category and paper figures (scripts/plot_eval.py, unchanged) with d1-ultra and Laya typed added to STYLE.
 Okabe-Ito: the five existing models use green, vermillion, blue, reddish purple and sky blue; the new two take the
 remaining orange and yellow, each with its own hatch and marker."""
 import sys
@@ -15,3 +15,12 @@ for name in ("core", "ood"):
     results, rows, test, categories = ev.compute_set(name)
     results = sorted((r for r in results if r["model"] in keep), key=lambda r: keep.index(r["model"]))
     pe.plot(results, rows, test, categories, out=out / name, name=name)
+
+# paper figures, exactly as `eval.py paper` builds them
+sets = {}
+for name in ("core", "ood"):
+    results, _, test, _ = ev.compute_set(name)
+    nb, nh = sum(r["kind"] == "benign" for r in test), sum(r["kind"] == "hard_negative" for r in test)
+    sets[name] = [r | {"n_benign": nb, "n_hard": nh} for r in results]
+for path in pe.paper(sets["core"], sets["ood"], out / "paper"):
+    print(f"wrote {path}")
